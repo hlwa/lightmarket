@@ -48,7 +48,7 @@ router.get('/wishlist/:id', (req, res) => {
 });
 
 //router for orderlist, need join users, orders,order_items,products table
-// GET /products/:user_id
+// GET /products/orderlist/:user_id
 router.get('/orderlist/:id', (req, res) => {
   productQueries.getOrdersProductsByUserId(req.params.id)
     .then((products) => {
@@ -63,7 +63,7 @@ router.get('/orderlist/:id', (req, res) => {
 });
 
 //router for single order, need join products and order_items table
-// GET /products/:order_id
+// GET /products/order/:order_id
 router.get('/order/:id', (req, res) => {
   productQueries.getProductsByOrderId(req.params.id)
     .then((products) => {
