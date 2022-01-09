@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
   productQueries.getProducts()
     .then((products) => {
       res.json(products);
-      // res.render(createProductList(products))
+      // res.render("products_list", templateVars) //render .ejs file
     })
     .catch(err => {
       res
@@ -23,7 +23,7 @@ router.get('/:id', (req, res) => {
   productQueries.getProductById(req.params.id)
     .then((product) => {
       res.json(product);
-      // res.render(createProductDetail(products))
+      // res.render("prodcut_id", templateVars) //render .ejs file
     })
     .catch(err => {
       res
@@ -38,7 +38,7 @@ router.get('/wishlist/:id', (req, res) => {
   productQueries.getWishProductsByUserId(req.params.id)
     .then((products) => {
       res.json(products);
-      // res.render(createProductList(products))
+      // res.render("wishlist", templateVars) //render .ejs file
     })
     .catch(err => {
       res
@@ -53,7 +53,7 @@ router.get('/orderlist/:id', (req, res) => {
   productQueries.getOrdersProductsByUserId(req.params.id)
     .then((products) => {
       res.json(products);
-      // res.render(createOrderList(products))
+      // res.render("orderlist", templateVars) //render .ejs file
     })
     .catch(err => {
       res
@@ -68,7 +68,7 @@ router.get('/order/:id', (req, res) => {
   productQueries.getProductsByOrderId(req.params.id)
     .then((products) => {
       res.json(products);
-      // res.render(createOrder(products))
+      // res.render("order_id", templateVars) //render .ejs file
     })
     .catch(err => {
       res
