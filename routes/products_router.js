@@ -5,7 +5,7 @@ const productQueries = require('../db/product-queries');
 //router for home_page, admin_center
 // GET /products/
 router.get('/', (req, res) => {
-  productQueries.getProducts()
+  productQueries.getAllProducts(req.query, 20)
     .then((products) => {
       res.json(products);
       // res.render("products_list", templateVars) //render .ejs file
@@ -66,6 +66,21 @@ router.get('/orderlist/:id', (req, res) => {
 // GET /products/order/:order_id
 router.get('/order/:id', (req, res) => {
   productQueries.getProductsByOrderId(req.params.id)
+    .then((products) => {
+      res.json(products);
+      // res.render("order_id", templateVars) //render .ejs file
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
+
+//router for price filter, need join products and order_items table
+// POST /products/price_filter
+router.get('/price_filter', (req, res) => {
+  productQueries.getAllProducts(req.query, 20)
     .then((products) => {
       res.json(products);
       // res.render("order_id", templateVars) //render .ejs file
