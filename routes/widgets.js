@@ -4,24 +4,51 @@
  *   these routes are mounted onto /widgets
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
-
+require("dotenv").config();
 const express = require('express');
 const router  = express.Router();
+const userQueries = require('../db/user-queries');
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const tPHONE = process.env.TWILIO_PHONE;
+const client = require('twilio')(accountSid, authToken);
 
-module.exports = (db) => {
-  router.get("/", (req, res) => {
-    let query = `SELECT * FROM widgets`;
-    console.log(query);
-    db.query(query)
-      .then(data => {
-        const widgets = data.rows;
-        res.json({ widgets });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
-  return router;
-};
+//"GET"  /message_page/:id  getUserByid
+router.get("/message_page/:id", (req, res) => {
+  userQueries.getUserByid(req.params.id)
+    .then(data => {
+      const user = data.rows[0];
+      res.json({ user });
+      // res.render("message_page", templateVars) //render .ejs file
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
+
+//"POST"  /message_send/:id  getUserByid
+router.post("/message_send/:id", (req, res) => {
+  const user = req.body;
+  client.messages
+    .create({
+      body: user.message,
+      from: tPHONE,
+      to: user.mobile
+    })
+    .then(message => console.log(message.sid))
+    .then(message => {
+      res.json({ message });
+      // res.render("message_page", templateVars) //render .ejs file
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
+
+
+// export the router object
+module.exports = router;
