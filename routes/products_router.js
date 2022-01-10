@@ -5,7 +5,7 @@ const productQueries = require('../db/product-queries');
 //router for home_page, admin_center
 // GET /products/
 router.get('/', (req, res) => {
-  productQueries.getAllProducts(req.query, 20)
+  productQueries.getAllProducts()
     .then((products) => {
       res.json(products);
       // res.render("products_list", templateVars) //render .ejs file
@@ -79,8 +79,9 @@ router.get('/order/:id', (req, res) => {
 
 //router for price filter, need join products and order_items table
 // POST /products/price_filter
-router.get('/price_filter', (req, res) => {
-  productQueries.getAllProducts(req.query, 20)
+router.post('/price_filter', (req, res) => {
+  let {minPrice, Maxprice} = req.body;
+  productQueries.getProductsByFilter(minPrice, Maxprice)
     .then((products) => {
       res.json(products);
       // res.render("order_id", templateVars) //render .ejs file
