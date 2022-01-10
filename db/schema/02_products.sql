@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS products CASCADE;
 CREATE TABLE products (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(100),
@@ -6,3 +6,4 @@ CREATE TABLE products (
   price DECIMAL,
   sold BOOLEAN DEFAULT True,
   description TEXT
+);

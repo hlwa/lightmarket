@@ -9,7 +9,7 @@ VALUES(
 - Lysol Disinfecting Wipes can be used as a convenient way to clean and disinfect your household surfaces'
  ),
 
-(3, 'RAPID COVID-19 ANTIGEN TEST KIT (5-PACK)', 1, '80.00', '
+(3, 'RAPID COVID-19 ANTIGEN TEST KIT (5-PACK)', 1, '80.00',False,  '
 5-Pack of Rapid COVID-19 Antigen Tests (Nasal or Nasopharyngeal swabs)
 Each Rapid Test Kit Contains:
 - 5 x Test cassettes
@@ -21,7 +21,7 @@ Each Rapid Test Kit Contains:
 
 ),
 
-(4, 'Disposable Face Mask (50pcs)', 1, '12.99', '
+(4, 'Disposable Face Mask (50pcs)', 1, '12.99', False, '
 - Sold online exclusively.
 - Full width adjustable nose strip.
 - Outer Layer: 100% Spunbond Polypropylene; Central Layer: 100% Melt Blown Polypropylene; Inner Layer: 100% Spunbond Polypropylene
