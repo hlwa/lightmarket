@@ -5,7 +5,7 @@ CREATE TABLE products (
   name VARCHAR(100),
   seller_id INTEGER REFERENCES users(id),
   price DECIMAL,
-  sold BOOLEAN DEFAULT True,
+  sold BOOLEAN DEFAULT true,
   description TEXT,
   url TEXT
 );
