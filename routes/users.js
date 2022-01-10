@@ -14,8 +14,8 @@ const userQueries = require('../db/user-queries');
 router.get("/login/:id", (req, res) => {
   userQueries.getUserByid(req.params.id)
     .then(data => {
-      const users = data.rows;
-      res.json({ users });
+      const user = data.rows[0];
+      res.json({ user });
       // res.render("products_list", templateVars) //render .ejs file
     })
     .catch(err => {

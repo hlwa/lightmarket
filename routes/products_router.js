@@ -34,8 +34,8 @@ router.get('/:id', (req, res) => {
 
 //router for wishlist, need join wish and users table
 // GET /products/wishlist/:user_id
-router.get('/wishlist/:id', (req, res) => {
-  productQueries.getWishProductsByUserId(req.params.id)
+router.get('/wishlist/:user_id', (req, res) => {
+  productQueries.getWishProductsByUserId(req.params.user_id)
     .then((products) => {
       res.json(products);
       // res.render("wishlist", templateVars) //render .ejs file
@@ -49,8 +49,8 @@ router.get('/wishlist/:id', (req, res) => {
 
 //router for orderlist, need join users, orders,order_items,products table
 // GET /products/orderlist/:user_id
-router.get('/orderlist/:id', (req, res) => {
-  productQueries.getOrdersProductsByUserId(req.params.id)
+router.get('/orderlist/:user_id', (req, res) => {
+  productQueries.getOrdersProductsByUserId(req.params.user_id)
     .then((products) => {
       res.json(products);
       // res.render("orderlist", templateVars) //render .ejs file
@@ -64,8 +64,8 @@ router.get('/orderlist/:id', (req, res) => {
 
 //router for single order, need join products and order_items table
 // GET /products/order/:order_id
-router.get('/order/:id', (req, res) => {
-  productQueries.getProductsByOrderId(req.params.id)
+router.get('/order/:order_id', (req, res) => {
+  productQueries.getProductsByOrderId(req.params.order_id)
     .then((products) => {
       res.json(products);
       // res.render("order_id", templateVars) //render .ejs file
@@ -78,8 +78,8 @@ router.get('/order/:id', (req, res) => {
 });
 
 //GET /products/checkout/:order_id
-router.get('/checkout/:id', (req, res) => {
-  productQueries.getProductsByOrderId(req.params.id)
+router.get('/checkout/:order_id', (req, res) => {
+  productQueries.getProductsByOrderId(req.params.order_id)
     .then((products) => {
       res.json(products);
       // res.render("checkout", templateVars) //render .ejs file
@@ -92,8 +92,8 @@ router.get('/checkout/:id', (req, res) => {
 });
 //Do we need a cart table? a new query for cart products?
 //GET /products/cart/:user_id
-router.get('/cart/:id', (req, res) => {
-  productQueries.getCartProductsByUserId(req.params.id)//
+router.get('/cart/:user_id', (req, res) => {
+  productQueries.getCartProductsByUserId(req.params.user_id)//
     .then((products) => {
       res.json(products);
       // res.render("cart", templateVars) //render .ejs file
@@ -123,7 +123,7 @@ router.post('/price_filter', (req, res) => {
 });
 
 //POST /products/delete_product   removeProductByid
-router.post('/delete_product', (req, res) => {
+router.delete('/product/:id', (req, res) => {
   productQueries.removeProductByid(req.params.id)
     .then((products) => {
       res.json(products);
@@ -137,7 +137,7 @@ router.post('/delete_product', (req, res) => {
 });
 
 //POST /products/edit_product   editProductByid
-router.post('/edit_product', (req, res) => {
+router.put('/product/:id', (req, res) => {
   productQueries.editProductByid(req.params.id)
     .then((products) => {
       res.json(products);
@@ -151,7 +151,7 @@ router.post('/edit_product', (req, res) => {
 });
 
 //POST /products/add_product addProduct
-router.post('/add_product', (req, res) => {
+router.post('/product/:id', (req, res) => {
   productQueries.addProduct(req.params.id)
     .then((products) => {
       res.json(products);
@@ -165,8 +165,8 @@ router.post('/add_product', (req, res) => {
 });
 
 //POST /products/cart/add_product   addProducttoCart
-router.post('/cart/add_product', (req, res) => {
-  productQueries.addProducttoCart()
+router.post('/cart/:car_id/product/:prodcut_id', (req, res) => {
+  productQueries.addProducttoCart(req.params.car_id,req.params.prodcut_id)
     .then((products) => {
       res.json(products);
       // res.render("cart", templateVars) //render .ejs file
@@ -179,7 +179,7 @@ router.post('/cart/add_product', (req, res) => {
 });
 
 //POST /products/cart/delete_product   removeProductFromCartByid
-router.post('/cart/delete_product', (req, res) => {
+router.delete('/cart/product/:id', (req, res) => {
   productQueries.removeProductFromCartByid(req.params.id)
     .then((products) => {
       res.json(products);
@@ -193,8 +193,8 @@ router.post('/cart/delete_product', (req, res) => {
 });
 
 //POST /products/wishlist/add_product   addProducttoWishlist
-router.post('/wishlist/add_product', (req, res) => {
-  productQueries.addProductToWishlist()
+router.post('/wishlist/add_product/:id', (req, res) => {
+  productQueries.addProductToWishlist(req.params.id)
     .then((products) => {
       res.json(products);
       // res.render("wishlist", templateVars) //render .ejs file
@@ -207,7 +207,7 @@ router.post('/wishlist/add_product', (req, res) => {
 });
 
 //POST /products/wishlist/delete_product   removeProductFromWishlist
-router.post('/wishlist/delete_product', (req, res) => {
+router.delete('/wishlist/delete_product/:id', (req, res) => {
   productQueries.removeProductFromWishlist(req.params.id)
     .then((products) => {
       res.json(products);
