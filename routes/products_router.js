@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const productQueries = require('../db/product-queries');
+const productQueries = require('../db/queries/products_queries');
 
 //router for home_page, admin_center
 // GET /products/
