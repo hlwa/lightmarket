@@ -2,6 +2,6 @@ DROP TABLE IF EXISTS cart_items CASCADE;
 
 CREATE TABLE cart_items (
 id SERIAL PRIMARY KEY NOT NULL,
-user_id INTEGER REFERENCES users(id) ,
+user_id INTEGER REFERENCES users(id),
 product_id INTEGER REFERENCES products(id)
 );
