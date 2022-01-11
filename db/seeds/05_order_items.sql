@@ -1,3 +1,3 @@
-INSERT INTO order_items(id,order_id, product_id)
-VALUES (1,1,2),
+INSERT INTO order_items(id,user_id, product_id)
+VALUES (1,4,2),
 (2,2,3);
