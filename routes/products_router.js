@@ -77,9 +77,9 @@ router.get('/order/:order_id', (req, res) => {
     });
 });
 
-//GET /products/checkout/:order_id
-router.get('/checkout/:order_id', (req, res) => {
-  productQueries.getProductsByOrderId(req.params.order_id)
+//GET /products/checkout/:product_id(Allow user to buy 1 item per order)
+router.get('/checkout/:product_id', (req, res) => {
+  productQueries.getProductById(req.params.order_id)
     .then((products) => {
       res.json(products);
       // res.render("checkout", templateVars) //render .ejs file
@@ -90,7 +90,7 @@ router.get('/checkout/:order_id', (req, res) => {
         .json({ error: err.message });
     });
 });
-//Do we need a cart table? a new query for cart products?
+//<<<<<<<<<<<<<<<<Cart feature is stretch>>>>>>>>>>>>>>>>
 //GET /products/cart/:user_id
 router.get('/cart/:user_id', (req, res) => {
   productQueries.getCartProductsByUserId(req.params.user_id)//
@@ -152,7 +152,7 @@ router.put('/product/:id', (req, res) => {
 
 //POST /products/add_product addProduct
 router.post('/product/:id', (req, res) => {
-  productQueries.addProduct(req.params.id)//should be product be prameter
+  productQueries.addProduct(req.params.id)//>>>>>>>>>>>>>should be product be prameter
     .then((products) => {
       res.json(products);
       // res.render("admin_center", templateVars) //render .ejs file
@@ -164,6 +164,7 @@ router.post('/product/:id', (req, res) => {
     });
 });
 
+//<<<<<<<<<<<<<<<<<<<Cart feature is stretch>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //POST /products/cart/add_product   addProducttoCart
 router.post('/cart/:car_id/product/:prodcut_id', (req, res) => {
   productQueries.addProducttoCart(req.params.car_id,req.params.prodcut_id)
@@ -177,7 +178,7 @@ router.post('/cart/:car_id/product/:prodcut_id', (req, res) => {
         .json({ error: err.message });
     });
 });
-
+//<<<<<<<<<<<<<<<<<<<Cart feature is stretch>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //POST /products/cart/delete_product   removeProductFromCartByid
 router.delete('/cart/product/:id', (req, res) => {
   productQueries.removeProductFromCartByid(req.params.id)

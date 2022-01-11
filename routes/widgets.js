@@ -7,7 +7,7 @@
 require("dotenv").config();
 const express = require('express');
 const router  = express.Router();
-const userQueries = require('../db/user-queries');
+const userQueries = require('../db/queries/user-queries');
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const tPHONE = process.env.TWILIO_PHONE;

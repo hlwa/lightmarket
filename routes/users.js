@@ -7,7 +7,9 @@
 
 const express = require('express');
 const router  = express.Router();
-const userQueries = require('../db/user-queries');
+const userQueries = require('../db/queries/user-queries');
+
+console.log(userQueries.getUserById);
 
 //"GET"  /login/:id  getUserByid
 

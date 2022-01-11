@@ -1,4 +1,4 @@
-const db = require('../server.js');
+const db = require('../db');
 
 const addProduct = (product) => {
   return db
@@ -13,6 +13,7 @@ const addProduct = (product) => {
 };
 
 const getAllProducts = () => {
+
   return db
     .query(`SELECT *
   FROM products`)
@@ -23,7 +24,7 @@ const getAllProducts = () => {
 };
 
 const getProductById = (id) => {
-    return db
+  return db
     .query(`SELECT *
     FROM products
     WHERE id = $1`, [id])
@@ -31,62 +32,62 @@ const getProductById = (id) => {
       return result.rows[0];
     })
     .catch(err => console.log(err));
-  };
+};
 
-  const getWishProductsByUserId  = (id) => {
-    return db
-      .query(`SELECT products.name as product_name, users.username as name
+const getWishProductsByUserId  = (id) => {
+  return db
+    .query(`SELECT products.name as product_name, users.username as name
     FROM wish_items
     JOIN products ON  product_id = products.id
     JOIN users ON user_id = users.id
     WHERE users.id = $1`, [id])
-      .then((result) => {
-        console.log(`result:`, result.rows);
-        return result.rows;
-      })
-      .catch(err => console.log(err));
-   };
+    .then((result) => {
+      console.log(`result:`, result.rows);
+      return result.rows;
+    })
+    .catch(err => console.log(err));
+};
 
 
 
 
-   const getOrdersProductsByUserId = (id) => {
-    return db
+const getOrdersProductsByUserId = (id) => {
+  return db
     .query(`SELECT * FROM products
     JOIN order_items ON products.id = product_id
-    JOIN orders ON orders.id = order_id
+    JOIN orders ON orders.user_id  = order_items.user_id
     WHERE orders.user_id = $1`,[id])
 
-      .then((response) => {
-        console.log(response.rows);
-        return response.rows;
-      })
-      .catch(err => console.log(err));
-  };
+    .then((response) => {
+      console.log(response.rows);
+      return response.rows;
+    })
+    .catch(err => console.log(err));
+};
 
-  const getProductsByOrderId = (id) => {
-    return db
-      .query(`SELECT * FROM products
+const getProductsByOrderId = (id) => {
+  return db
+    .query(`SELECT * FROM products
               JOIN order_items ON products.id = product_id
               WHERE order_id = $1`, [id])
-      .then((response) => {
-        console.log(response.rows);
-        return response.rows;
-      })
-      .catch(err => console.log(err));
-  };
+    .then((response) => {
+      console.log(response.rows);
+      return response.rows;
+    })
+    .catch(err => console.log(err));
+};
 
-  const getProductsByFilter = (minPrice, maxPrice) => {
-    if (minPrice && maxPrice) {
-      return db
+const getProductsByFilter = (minPrice, maxPrice) => {
+  if (minPrice && maxPrice) {
+    return db
       .query(`SELECT * FROM products
               WHERE price >= $1 AND price <= $2`,[minPrice, maxPrice])
       .then((response) => {
         console.log(response.rows);
         return response.rows;
-      })
-    } else if (minPrice) {
-      return db
+      });
+  } else if (minPrice) {
+    return db
       .query(`SELECT * FROM products
                 WHERE price >= $1
               `,[minPrice])
@@ -94,8 +95,8 @@ const getProductById = (id) => {
         console.log(response.rows);
         return response.rows;
       });
-    } else if (maxPrice) {
-      return db
+  } else if (maxPrice) {
+    return db
       .query(`SELECT * FROM products
                 WHERE price <= $1
               `, [maxPrice])
@@ -104,68 +105,68 @@ const getProductById = (id) => {
         return response.rows;
       })
       .catch(err => console.log(err));
-    }
-  };
+  }
+};
 
 const getProductsByCartId = (id) => {
-    return db
-      .query(`SELECT *
+  return db
+    .query(`SELECT *
         FROM cart_items
               JOIN products ON product_id = products.id
               WHERE cart_items.id = $1`, [id])
-              .then((result) => {
-                console.log(result.rows);
-                return result.rows;
-              })
-              .catch(err => console.log(err));
-   }
+    .then((result) => {
+      console.log(result.rows);
+      return result.rows;
+    })
+    .catch(err => console.log(err));
+};
 
-   
 
-  const addProductToCart = (id, userId, productId) => {
-    return db
-      .query(`INSERT INTO cart_items ( id, user_id, product_id)
+
+const addProductToCart = (id, userId, productId) => {
+  return db
+    .query(`INSERT INTO cart_items ( id, user_id, product_id)
       VALUES ($1, $2, $3);`,[id, userId, productId]
-      )
-      .then((response) => {
-        console.log(response.rows);
-        return response.rows;
-      })
-      .catch(err => console.log(err));
-   }
+    )
+    .then((response) => {
+      console.log(response.rows);
+      return response.rows;
+    })
+    .catch(err => console.log(err));
+};
 
-   const addProductToWishlist = (id, userId, productId) => {
-    return db
-      .query(`INSERT INTO wish_items ( id, user_id, product_id)
+const addProductToWishlist = (id, userId, productId) => {
+  return db
+    .query(`INSERT INTO wish_items ( id, user_id, product_id)
       VALUES ($1, $2, $3);`,[id, userId, productId]
-      )
-      .then((response) => {
-        return response.rows;
-      })
-      .catch(err => console.log(err));
-   }
+    )
+    .then((response) => {
+      return response.rows;
+    })
+    .catch(err => console.log(err));
+};
 
 
-   const removeProductFromWishItemsById = (id) => {
-    return db
-      .query(`DELETE FROM wish_items
+const removeProductFromWishItemsById = (id) => {
+  return db
+    .query(`DELETE FROM wish_items
               WHERE product_id = $1`, [id])
-      .then((response) => {
-        console.log(response.rows);
-        return response.rows;
-      })
-      .catch(err => console.log(err));
-   }
+    .then((response) => {
+      console.log(response.rows);
+      return response.rows;
+    })
+    .catch(err => console.log(err));
+};
 
-   const removeProductFromCartById = (id) => {
-    return db
-      .query(`DELETE FROM cart_items
+const removeProductFromCartById = (id) => {
+  return db
+    .query(`DELETE FROM cart_items
               WHERE product_id = $1`, [id])
-      .then((response) => {
-        return response.rows;
-      })
-      .catch(err => console.log(err));
-   }
+    .then((response) => {
+      return response.rows;
+    })
+    .catch(err => console.log(err));
+};
 
 
 module.exports = {
@@ -176,7 +177,6 @@ module.exports = {
   getOrdersProductsByUserId,
   getProductsByOrderId,
   getProductsByFilter,
-  getUserById,
   getProductsByCartId,
   addProductToCart,
   addProductToWishlist,
