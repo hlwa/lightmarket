@@ -1,17 +1,80 @@
 body {
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   min-height: 100vh;
+  background-color: #ACE9D4;
+  padding-top: 8em;
+  // display: flex;
+  // flex-direction: row;
+  // justify-content: space-around;
+ }
+ .container-1{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 
-  background: rgb(163, 208, 219);
-  background: linear-gradient(
-    227deg,
-    rgba(163, 208, 219, 1) 0%,
-    rgba(163, 176, 219, 1) 20%,
-    rgba(163, 173, 219, 1) 34%,
-    rgba(163, 219, 208, 1) 59%,
-    rgba(163, 208, 219, 1) 74%,
-    rgba(163, 208, 219, 1) 100%
-  );
+
+  .p1{
+   border: black 1px solid;
+
+    header{
+      height: 300px;
+      width: 200px;
+      // background-image: url("/png/sanitizer.jpg");
+      background-size: cover;
+      border-radius: 5%;
 }
+}
+
+  .p2{
+    border: black 1px solid;
+    header{
+      width: 300px;
+      height: 300px;
+      // background-image: url("/png/lysol.jpg");
+      background-size: cover;
+      border-radius: 5%;
+
+      }
+}
+      .p3{
+        border: black 1px solid;
+        header{
+          width: 300px;
+          height: 300px;
+          // background-image: url("/png/rapidtest.jpg");
+          background-size: cover;
+          border-radius: 5%;
+
+          }
+          }
+ }
+
+ .container-2{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  .p4{
+border: black 1px solid;
+  }
+  .p5{
+    border: black 1px solid;
+      }
+      .p6{
+        border: black 1px solid;
+          }
+ }
+
+ .container-3{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  .p7{
+border: black 1px solid;
+  }
+  .p8{
+    border: black 1px solid;
+      }
+      .p9{
+        border: black 1px solid;
+          }
+ }

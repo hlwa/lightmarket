@@ -1,9 +1,26 @@
 nav {
    background-color: black;
    color: white;
-   size: 20em;
    height: 100px;
+   padding-top: 2em;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   position: fixed;
+   top: 0;
+   width: 100%;
 
 
 
 }
+  .nav-title{
+    font-size: 40px;
+    margin-left: 0.5em ;
+}
+   .nav-options{
+   margin-left: 30em;
+   font-size: 20px;
+   }
+
+
+
