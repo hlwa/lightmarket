@@ -47,7 +47,7 @@ router.get('/wishlist/:user_id', (req, res) => {
     });
 });
 
-//router for orderlist, need join users, orders,order_items,products table
+//router for orderlist, need join orders,order_items,products table
 // GET /products/orderlist/:user_id
 router.get('/orderlist/:user_id', (req, res) => {
   productQueries.getOrdersProductsByUserId(req.params.user_id)
@@ -152,7 +152,7 @@ router.put('/product/:id', (req, res) => {
 
 //POST /products/add_product addProduct
 router.post('/product/:id', (req, res) => {
-  productQueries.addProduct(req.params.id)
+  productQueries.addProduct(req.params.id)//should be product be prameter
     .then((products) => {
       res.json(products);
       // res.render("admin_center", templateVars) //render .ejs file
