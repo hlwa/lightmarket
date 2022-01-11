@@ -1,4 +1,19 @@
-const db = require('./db');
+// load .env data into process.env
+require("dotenv").config();
+
+// Web server config
+const PORT = process.env.PORT || 8080;
+const sassMiddleware = require("./lib/sass-middleware");
+const express = require("express");
+const app = express();
+const morgan = require("morgan");
+
+// PG database client/connection setup
+const { Pool } = require("pg");
+const dbParams = require("./lib/db.js");
+const db = new Pool(dbParams);
+db.connect();
+
 
 const addProduct = (product) => {
   return db
@@ -11,6 +26,16 @@ const addProduct = (product) => {
     })
     .catch(err => console.log(err));
 };
+const product = {
+  'id':'110',
+  'name': 'mask101',
+  'seller_id':'1',
+  'price': '3.99',
+  'sold': 'false',
+  'description': 'test',
+  'url': 'https://unsplash.com/photos/u4gX3FWzchM'
+};
+//addProduct(product);
 
 const getAllProducts = () => {
   return db
@@ -22,35 +47,37 @@ const getAllProducts = () => {
     });
 };
 
+//getAllProducts();
+
+
 const getProductById = (id) => {
-    return db
-    .query(`SELECT *
-    FROM products
-    WHERE id = $1`, [id])
+  return db
+  .query(`SELECT *
+  FROM products
+  WHERE id = $1`, [id])
+  .then((result) => {
+    console.log(result.rows[0]);
+    return result.rows[0];
+  });
+};
+
+
+// getProductById(1);
+const getWishProductsByUserId  = (id) => {
+  return db
+    .query(`SELECT products.name as product_name, users.username as name
+  FROM wish_items
+  JOIN products ON  product_id = products.id
+  JOIN users ON user_id = users.id
+  WHERE users.id = $1`, [id])
     .then((result) => {
-      return result.rows[0];
-    })
-    .catch(err => console.log(err));
-  };
+      console.log(`result:`, result.rows);
+      return result.rows;
+    });
+ };
 
-  const getWishProductsByUserId  = (id) => {
-    return db
-      .query(`SELECT products.name as product_name, users.username as name
-    FROM wish_items
-    JOIN products ON  product_id = products.id
-    JOIN users ON user_id = users.id
-    WHERE users.id = $1`, [id])
-      .then((result) => {
-        console.log(`result:`, result.rows);
-        return result.rows;
-      })
-      .catch(err => console.log(err));
-   };
-
-
-
-
-   const getOrdersProductsByUserId = (id) => {
+  //getWishProductsByUserId(2);
+  const getOrdersProductsByUserId = (id) => {
     return db
     .query(`SELECT * FROM products
     JOIN order_items ON products.id = product_id
@@ -63,7 +90,7 @@ const getProductById = (id) => {
       })
       .catch(err => console.log(err));
   };
-
+  //getOrdersProductsByUserId(2);
   const getProductsByOrderId = (id) => {
     return db
       .query(`SELECT * FROM products
@@ -75,7 +102,7 @@ const getProductById = (id) => {
       })
       .catch(err => console.log(err));
   };
-
+  //getProductsByOrderId(2);
   const getProductsByFilter = (minPrice, maxPrice) => {
     if (minPrice && maxPrice) {
       return db
@@ -106,8 +133,8 @@ const getProductById = (id) => {
       .catch(err => console.log(err));
     }
   };
-
-const getProductsByCartId = (id) => {
+  //getProductsByFilter(10, null);
+  const getProductsByCartId = (id) => {
     return db
       .query(`SELECT *
         FROM cart_items
@@ -119,7 +146,7 @@ const getProductsByCartId = (id) => {
               })
               .catch(err => console.log(err));
    }
-
+   //getProductsByCartId(2);
    const getUserById = (id) => {
     return db
     .query(`SELECT *
@@ -131,65 +158,17 @@ const getProductsByCartId = (id) => {
     })
     .catch(err => console.log(err));
   }
+  //getUserById(2);
 
-const addProductToCart = (userId, productId) => {
-  return db
-    .query(`INSERT INTO wish_items ( user_id, product_id)
-    VALUES ($1, $2)RETURNING *,`[userId, productId]
-    )
-    .then((response) => {
-      return response.rows;
-    })
-    .catch(err => console.log(err));
- }
-
- const addProductToWishlist = (userId, productId) => {
-  return db
-    .query(`INSERT INTO wish_items ( user_id, product_id)
-    VALUES ($1, $2)RETURNING *,`[userId, productId]
-    )
-    .then((response) => {
-      return response.rows;
-    })
-    .catch(err => console.log(err));
- }
-
-
- const removeProductFromWishItemsById = (id) => {
-  return db
-    .query(`DELETE FROM wish_items
-            WHERE products.id = $1`, [id])
-    .then((response) => {
-      return response.rows;
-    })
-    .catch(err => console.log(err));
- }
-
- const removeProductFromCartById = (id) => {
-  return db
-    .query(`DELETE FROM cart_items
-            WHERE products.id = $1`, [id])
-    .then((response) => {
-      return response.rows;
-    })
-    .catch(err => console.log(err));
- }
-
-
-module.exports = {
-  addProduct,
-  getAllProducts,
-  getProductById,
-  getWishProductsByUserId,
-  getOrdersProductsByUserId,
-  getProductsByOrderId,
-  getProductsByFilter,
-  getUserById,
-  getProductsByCartId,
-  addProductToCart,
-  addProductToWishlist,
-  removeProductFromCartById,
-  removeProductFromWishItemsById
-
-};
-
+  const addProductToCart = (userId, productId) => {
+    return db
+      .query(`INSERT INTO cart_items ( user_id, product_id)
+      VALUES ($1, $2);`,[userId, productId]
+      )
+      .then((response) => {
+        console.log(result.rows[0]);
+        return response.rows;
+      })
+      .catch(err => console.log(err));
+   }
+   addProductToCart(3, 1);
