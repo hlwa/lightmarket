@@ -1,4 +1,4 @@
-const db = require('./db');
+const db = require('../server');
 
 const addProduct = (product) => {
   return db
