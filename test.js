@@ -205,4 +205,15 @@ const removeProductFromWishItemsById = (id) => {
     })
     .catch(err => console.log(err));
  }
- removeProductFromCartById(3);
+ //removeProductFromCartById(3);
+ const getUserById = (id) => {
+  return db
+  .query(`SELECT *
+  FROM users
+  WHERE id = $1`, [id])
+  .then((result) => {
+    return result.rows[0];
+  })
+  .catch(err => console.log(err));
+};
+getUserById(1);
