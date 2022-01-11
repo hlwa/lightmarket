@@ -10,3 +10,5 @@ const getUserById = (id) => {
   })
   .catch(err => console.log(err));
 }
+module.exports = {getUserById};
+

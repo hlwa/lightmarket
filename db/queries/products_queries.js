@@ -120,7 +120,7 @@ const getProductsByCartId = (id) => {
               .catch(err => console.log(err));
    }
 
-   
+
 
   const addProductToCart = (id, userId, productId) => {
     return db
@@ -176,7 +176,6 @@ module.exports = {
   getOrdersProductsByUserId,
   getProductsByOrderId,
   getProductsByFilter,
-  getUserById,
   getProductsByCartId,
   addProductToCart,
   addProductToWishlist,
