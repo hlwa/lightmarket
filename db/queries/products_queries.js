@@ -68,8 +68,9 @@ const getOrdersProductsByUserId = (id) => {
 const getProductsByOrderId = (id) => {
   return db
     .query(`SELECT * FROM products
-              JOIN order_items ON products.id = product_id
-              WHERE order_id = $1`, [id])
+  JOIN order_items ON products.id = product_id
+  JOIN orders ON orders.user_id  = order_items.user_id
+  WHERE orders.id = $1`, [id])
     .then((response) => {
       console.log(response.rows);
       return response.rows;

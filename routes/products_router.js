@@ -79,7 +79,7 @@ router.get('/order/:order_id', (req, res) => {
 
 //GET /products/checkout/:product_id(Allow user to buy 1 item per order)
 router.get('/checkout/:product_id', (req, res) => {
-  productQueries.getProductById(req.params.order_id)
+  productQueries.getProductById(req.params.product_id)
     .then((products) => {
       res.json(products);
       // res.render("checkout", templateVars) //render .ejs file
@@ -108,9 +108,10 @@ router.get('/cart/:user_id', (req, res) => {
 
 //router for price filter, need join products and order_items table
 // POST /products/price_filter
-router.post('/price_filter', (req, res) => {
-  let {minPrice, Maxprice} = req.body;
-  productQueries.getProductsByFilter(minPrice, Maxprice)
+router.post('/min/:minPrice/max/:maxPrice', (req, res) => {
+  //let {minPrice, Maxprice} = req.body;
+  console.log(req.params);
+  productQueries.getProductsByFilter(req.params.minPrice, req.params.maxPrice)
     .then((products) => {
       res.json(products);
       // res.render("products_list", templateVars) //render .ejs file
