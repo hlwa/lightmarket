@@ -160,15 +160,49 @@ const getWishProductsByUserId  = (id) => {
   }
   //getUserById(2);
 
-  const addProductToCart = (userId, productId) => {
+  const addProductToCart = (id, userId, productId) => {
     return db
-      .query(`INSERT INTO cart_items ( user_id, product_id)
-      VALUES ($1, $2);`,[userId, productId]
+      .query(`INSERT INTO cart_items ( id, user_id, product_id)
+      VALUES ($1, $2, $3);`,[id, userId, productId]
       )
       .then((response) => {
-        console.log(result.rows[0]);
+        console.log(response.rows);
         return response.rows;
       })
       .catch(err => console.log(err));
    }
-   addProductToCart(3, 1);
+   //addProductToCart(6,2, 3);
+   const addProductToWishlist = (id, userId, productId) => {
+    return db
+      .query(`INSERT INTO wish_items ( id, user_id, product_id)
+      VALUES ($1, $2, $3);`,[id, userId, productId]
+      )
+      .then((response) => {
+        return response.rows;
+      })
+      .catch(err => console.log(err));
+   }
+
+//addProductToWishlist(4, 3, 7);
+const removeProductFromWishItemsById = (id) => {
+  return db
+    .query(`DELETE FROM wish_items
+            WHERE product_id = $1`, [id])
+    .then((response) => {
+      console.log(response.rows);
+      return response.rows;
+    })
+    .catch(err => console.log(err));
+ }
+ //removeProductFromWishItemsById(2);
+
+ const removeProductFromCartById = (id) => {
+  return db
+    .query(`DELETE FROM cart_items
+            WHERE product_id = $1`, [id])
+    .then((response) => {
+      return response.rows;
+    })
+    .catch(err => console.log(err));
+ }
+ removeProductFromCartById(3);
