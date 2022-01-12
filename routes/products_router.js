@@ -1,4 +1,10 @@
 const express = require('express');
+const bodyParser = require("body-parser");
+const app = express();
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({extended: true}));
+
 const router = express.Router();
 const productQueries = require('../db/queries/products_queries');
 
@@ -9,7 +15,7 @@ router.get('/', (req, res) => {
     .then((products) => {
       // res.json(products);
       const templateVars = {products};//use test.ejs for testing
-      res.render("products_index",templateVars);
+      res.render("products_index",templateVars);//products_index.ejs
     })
     .catch(err => {
       res
@@ -129,16 +135,29 @@ router.get('/cart/:user_id', (req, res) => {
     });
 });
 
+// This route is for testing for post,put and delete
+router.get('/test/test', (req, res) => {
+  productQueries.getAllProducts()
+    .then((products) => {
+      // res.json(products);
+      const templateVars = {products};//use test.ejs for testing
+      res.render("test",templateVars);//products_index.ejs
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
 
 //router for price filter, need join products and order_items table
 // POST /products/price_filter
-router.post('/min/:minPrice/max/:maxPrice', (req, res) => {
-  //let {minPrice, Maxprice} = req.body;
-  console.log(req.params);
-  productQueries.getProductsByFilter(req.params.minPrice, req.params.maxPrice)
+router.post('/filter', (req, res) => {
+  let {minPrice, maxPrice} = req.body;
+  productQueries.getProductsByFilter(minPrice, maxPrice)
     .then((products) => {
-      // res.json(products);
-      res.render("products_list", products);//render .ejs file
+      const templateVars = {products};
+      res.render("test", templateVars);//render products_list.ejs file
     })
     .catch(err => {
       res

@@ -107,6 +107,16 @@ const getProductsByFilter = (minPrice, maxPrice) => {
       })
       .catch(err => console.log(err));
   }
+
+  return db
+    .query(`SELECT * FROM products
+          `)
+    .then((response) => {
+      console.log(response.rows);
+      return response.rows;
+    })
+    .catch(err => console.log(err));
+
 };
 
 const getProductsByCartId = (id) => {
