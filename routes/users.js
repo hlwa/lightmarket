@@ -9,15 +9,16 @@ const express = require('express');
 const router  = express.Router();
 const userQueries = require('../db/queries/user-queries');
 
-console.log(userQueries.getUserById);
+//console.log(userQueries.getUserById);
 
 //"GET"  /login/:id  getUserByid
 
 router.get("/login/:id", (req, res) => {
-  userQueries.getUserByid(req.params.id)
+  userQueries.getUserById(req.params.id)
     .then(data => {
-      const user = data.rows[0];
-      res.json({ user });
+      const user = data;
+      res.json(user);
+      console.log(`user is:`,user);
       // res.render("products_list", templateVars) //render .ejs file
     })
     .catch(err => {

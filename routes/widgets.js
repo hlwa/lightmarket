@@ -15,10 +15,10 @@ const client = require('twilio')(accountSid, authToken);
 
 //"GET"  /message_page/:id  getUserByid
 router.get("/message_page/:id", (req, res) => {
-  userQueries.getUserByid(req.params.id)
+  userQueries.getUserById(req.params.id)
     .then(data => {
-      const user = data.rows[0];
-      res.json({ user });
+      const user = data;
+      res.json(user);
       // res.render("message_page", templateVars) //render .ejs file
     })
     .catch(err => {
