@@ -8,7 +8,7 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;
 const tPHONE = process.env.TWILIO_PHONE;
 const client = require('twilio')(accountSid, authToken);
 
-let receiver = '+12049221870';
+let receiver = '+19377773737';
 let message = 'This is the ship that made the Kessel Run in fourteen parsecs?';
 
 client.messages
