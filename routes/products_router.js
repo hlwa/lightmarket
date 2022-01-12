@@ -7,10 +7,9 @@ const productQueries = require('../db/queries/products_queries');
 router.get('/', (req, res) => {
   productQueries.getAllProducts()
     .then((products) => {
-      //res.json(products);
-      //render .ejs file
-      console.log(products[0].name);
-      res.render("index", products);
+      // res.json(products);
+      const templateVars = {products};//use test.ejs for testing
+      res.render("products_index",templateVars);
     })
     .catch(err => {
       res
@@ -25,7 +24,8 @@ router.get('/:id', (req, res) => {
   productQueries.getProductById(req.params.id)
     .then((product) => {
       // res.json(product);
-      res.render("product_id", product);//render .ejs file
+      const templateVars = {product};
+      res.render("product_id", templateVars);//render product_id.ejs file
     })
     .catch(err => {
       res
@@ -40,7 +40,8 @@ router.get('/wishlist/:user_id', (req, res) => {
   productQueries.getWishProductsByUserId(req.params.user_id)
     .then((products) => {
       // res.json(products);
-      res.render("wishlist", products); //render .ejs file
+      const templateVars = {products};
+      res.render("wishlist", templateVars); //render wishlist.ejs file
     })
     .catch(err => {
       res
@@ -55,7 +56,8 @@ router.get('/orderlist/:user_id', (req, res) => {
   productQueries.getOrdersProductsByUserId(req.params.user_id)
     .then((products) => {
       // res.json(products);
-      res.render("orderlist", products);//render .ejs file
+      const templateVars = {products};
+      res.render("orderlist", templateVars);//render orderlist.ejs file
     })
     .catch(err => {
       res
@@ -70,7 +72,8 @@ router.get('/order/:order_id', (req, res) => {
   productQueries.getProductsByOrderId(req.params.order_id)
     .then((products) => {
       // res.json(products);
-      res.render("order_id", products);//render .ejs file
+      const templateVars = {products};
+      res.render("order_id", templateVars);//render order_id.ejs file
     })
     .catch(err => {
       res
@@ -85,8 +88,9 @@ router.get('/admin/:user_id', (req, res) => {
   productQueries.getAllProducts()
     .then((products) => {
     //res.json(products);
-    //render .ejs file
-      res.render("index", products);
+    //render index.ejs file
+      const templateVars = {products};
+      res.render("index", templateVars);
     })
     .catch(err => {
       res
@@ -98,9 +102,10 @@ router.get('/admin/:user_id', (req, res) => {
 //GET /products/checkout/:product_id(Allow user to buy 1 item per order)
 router.get('/checkout/:product_id', (req, res) => {
   productQueries.getProductById(req.params.product_id)
-    .then((products) => {
-      // res.json(products);
-      res.render("checkout", products);//render .ejs file
+    .then((product) => {
+      // res.json(product);
+      const templateVars = {product};
+      res.render("checkout", templateVars);//render checkout.ejs file
     })
     .catch(err => {
       res
@@ -114,7 +119,8 @@ router.get('/cart/:user_id', (req, res) => {
   productQueries.getCartProductsByUserId(req.params.user_id)//
     .then((products) => {
       // res.json(products);
-      res.render("cart", products);//render .ejs file
+      const templateVars = {products};
+      res.render("cart", templateVars);//render .ejs file
     })
     .catch(err => {
       res
