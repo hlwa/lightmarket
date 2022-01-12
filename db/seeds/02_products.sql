@@ -2,7 +2,7 @@ INSERT INTO products
   (id,name, seller_id, price, sold, description, url)
 VALUES(
   1, 'Travel Size Purell', 1, '2.99', False, '
-  - Purell Instant Hand Sanitizer kills 99.99% of germs with a refreshing gel', 'https://unsplash.com/photos/r41Xthw-fEk'
+  - Purell Instant Hand Sanitizer kills 99.99% of germs with a refreshing gel', 'png/sanitizer.jpg'
 ),
 
 (2,'Lysol Handi-pack Disinfecting Wipes',1, '14.99', False, '
