@@ -5,9 +5,24 @@
 </head>
 <body>
     <div class="table-data">
-<h2>Display Data using Node.js & MySQL</h2>
+<h2>Display Data using Express, Node.js & PSQL</h2>
+<% for(let product of products) { %>
+
+  <div><%= product.id %></div>
+  <div><%= product.name %></div>
+
+<% } %>
 
 
-    <div><%= products[0].id %></div>
+            <form method="POST" action='/products/filter'>
+              <div>minPrice</div>
+              <input type="text" id="minPrice" name="minPrice"><br>
+              <div>maxPrice</div>
+              <input type="text" id="maxPrice" name="maxPrice">
+              <button type="send" class="btn btn-outline-primary">Send</button>
+            </form>
+
+    </table>
+    </div>
 </body>
 </html>
