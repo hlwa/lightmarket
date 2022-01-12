@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
     .then((products) => {
       // res.json(products);
       const templateVars = {products};//
-      res.render("test",templateVars);
+      res.render("products_index",templateVars);
     })
     .catch(err => {
       res
