@@ -6,6 +6,13 @@
  */
 require("dotenv").config();
 const express = require('express');
+const bodyParser = require("body-parser");
+const app = express();
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({extended: true}));
+
+
 const router  = express.Router();
 const userQueries = require('../db/queries/user-queries');
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
@@ -16,10 +23,10 @@ const client = require('twilio')(accountSid, authToken);
 //"GET"  /message_page/:id  getUserByid
 router.get("/message_page/:id", (req, res) => {
   userQueries.getUserById(req.params.id)
-    .then(data => {
-      const user = data;
-      res.json(user);
-      // res.render("message_page", templateVars) //render .ejs file
+    .then(user => {
+      const templateVars = {user};
+      // res.json(user);
+      res.render("message_page", templateVars);//render message_page.ejs file
     })
     .catch(err => {
       res
@@ -29,8 +36,9 @@ router.get("/message_page/:id", (req, res) => {
 });
 
 //"POST"  /message_send/:id  getUserByid
-router.post("/message_send/:id", (req, res) => {
+router.post("/message_page/send/:id", (req, res) => {
   const user = req.body;
+  const id = req.params.id;
   client.messages
     .create({
       body: user.message,
@@ -38,10 +46,7 @@ router.post("/message_send/:id", (req, res) => {
       to: user.mobile
     })
     .then(message => console.log(message.sid))
-    .then(message => {
-      res.json({ message });
-      // res.render("message_page", templateVars) //render .ejs file
-    })
+    .then(res.redirect(`/api/widgets/message_page/${id}`))
     .catch(err => {
       res
         .status(500)

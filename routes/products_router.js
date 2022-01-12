@@ -1,4 +1,10 @@
 const express = require('express');
+const bodyParser = require("body-parser");
+const app = express();
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({extended: true}));
+
 const router = express.Router();
 const productQueries = require('../db/queries/products_queries');
 
@@ -9,7 +15,7 @@ router.get('/', (req, res) => {
     .then((products) => {
       // res.json(products);
       const templateVars = {products};//use test.ejs for testing
-      res.render("products_index",templateVars);
+      res.render("products_index",templateVars);//products_index.ejs
     })
     .catch(err => {
       res
