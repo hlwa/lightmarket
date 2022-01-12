@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
   productQueries.getAllProducts()
     .then((products) => {
       // res.json(products);
-      const templateVars = {products};//
+      const templateVars = {products};//use test.ejs for testing
       res.render("products_index",templateVars);
     })
     .catch(err => {
@@ -25,7 +25,7 @@ router.get('/:id', (req, res) => {
     .then((product) => {
       // res.json(product);
       const templateVars = {product};
-      res.render("product_id", templateVars);//render .ejs file
+      res.render("product_id", templateVars);//render product_id.ejs file
     })
     .catch(err => {
       res
@@ -41,7 +41,7 @@ router.get('/wishlist/:user_id', (req, res) => {
     .then((products) => {
       // res.json(products);
       const templateVars = {products};
-      res.render("wishlist", templateVars); //render .ejs file
+      res.render("wishlist", templateVars); //render wishlist.ejs file
     })
     .catch(err => {
       res
@@ -57,7 +57,7 @@ router.get('/orderlist/:user_id', (req, res) => {
     .then((products) => {
       // res.json(products);
       const templateVars = {products};
-      res.render("orderlist", templateVars);//render .ejs file
+      res.render("orderlist", templateVars);//render orderlist.ejs file
     })
     .catch(err => {
       res
@@ -73,7 +73,7 @@ router.get('/order/:order_id', (req, res) => {
     .then((products) => {
       // res.json(products);
       const templateVars = {products};
-      res.render("order_id", templateVars);//render .ejs file
+      res.render("order_id", templateVars);//render order_id.ejs file
     })
     .catch(err => {
       res
@@ -88,7 +88,7 @@ router.get('/admin/:user_id', (req, res) => {
   productQueries.getAllProducts()
     .then((products) => {
     //res.json(products);
-    //render .ejs file
+    //render index.ejs file
       const templateVars = {products};
       res.render("index", templateVars);
     })
@@ -102,10 +102,10 @@ router.get('/admin/:user_id', (req, res) => {
 //GET /products/checkout/:product_id(Allow user to buy 1 item per order)
 router.get('/checkout/:product_id', (req, res) => {
   productQueries.getProductById(req.params.product_id)
-    .then((products) => {
-      // res.json(products);
-      const templateVars = {products};
-      res.render("checkout", templateVars);//render .ejs file
+    .then((product) => {
+      // res.json(product);
+      const templateVars = {product};
+      res.render("checkout", templateVars);//render checkout.ejs file
     })
     .catch(err => {
       res
