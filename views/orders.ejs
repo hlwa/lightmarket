@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+
+  <link rel="stylesheet" href="/styles/orders.css">
+
+  <title>Orders</title>
+</head>
+
+<body>
+  <header><b>
+      <h1> Orders </h1>
+    </b></header>
+  <div class=products>
+
+    <tbody>
+      <% for(product of products) { %>
+        <div class="main-content">
+          <div class="container-1">
+            <img src="<%= product.url %>"><br>
+          </div>
+          <div class="container-2">
+            <%=product.name %><br>
+            <%=product.price %><br>
+          </div>
+          <p class="container-3">
+            <%=product.description %>
+          </p>
+
+        </div>
+        <% } %>
+    </tbody>
+
+  </div>
+
+</body>
+
+</html>

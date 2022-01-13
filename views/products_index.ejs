@@ -54,7 +54,7 @@
               <div class="name-price">
                 <%= product.name %> $<%= product.price %>
               </div>
-              <form >
+              <form method="POST" action="/products/wishlist/add_product/<%-product.id %> >
                 <button><i class="fas fa-heart"></i></button>
               </form>
 

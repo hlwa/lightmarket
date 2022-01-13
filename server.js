@@ -12,9 +12,13 @@ const morgan = require("morgan");
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan("dev"));
-
+const bodyParser = require("body-parser");
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({extended: true}));
+
 
 app.use(
   "/styles",
@@ -33,11 +37,13 @@ const productsRoutes = require("./routes/products_router");//right path and can 
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
 
+
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/products", productsRoutes);
 app.use("/api/users", usersRoutes);//api/users---jason   //users--html
 app.use("/api/widgets", widgetsRoutes);
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -45,7 +51,7 @@ app.use("/api/widgets", widgetsRoutes);
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  res.redirect('/products/products_index');
+  res.redirect('/products/');
 });
 
 app.listen(PORT, () => {
