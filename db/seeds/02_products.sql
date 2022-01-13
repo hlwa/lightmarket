@@ -2,14 +2,17 @@ INSERT INTO products
   (id,name, seller_id, price, sold, description, url)
 VALUES(
   1, 'Travel Size Purell', 1, '2.99', False, '
-  - Purell Instant Hand Sanitizer kills 99.99% of germs with a refreshing gel', 'png/sanitizer.jpg'
+  - Purell Instant Hand Sanitizer kills 99.99% of germs with a refreshing gel', "'png/sanitizer.jpg'"
 ),
+
+
 
 (2,'Lysol Disinfectant Spray',1, '14.99', False, '
 - Kills 99.99% of viruses & bacteria
 - Kills over 100 illness causing germs, including cold & flu viruses
 - Kills 99.9% of odor causing bacteria
 - Kills over 100 illness causing germs including the virus that causes covid19 (sars-cov-2) on-hard non-porus surfaces', '/png/lysol.jpg'
+>>>>>>> d2f15f2f9b26ef52a7fac72d676e5279bde14533
  ),
 
 (3, 'RAPID COVID-19 ANTIGEN TEST KIT (5-PACK)', 1, '80.00',False,  '
