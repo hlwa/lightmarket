@@ -154,10 +154,10 @@ router.get('/test/test', (req, res) => {
 // POST /products/price_filter
 router.post('/filter', (req, res) => {
   let {minPrice, maxPrice} = req.body;
+  console.log(minPrice,maxPrice)
   productQueries.getProductsByFilter(minPrice, maxPrice)
     .then((products) => {
-      const templateVars = {products};
-      res.render("test", templateVars);//render products_list.ejs file
+      res.status(200).json({products})
     })
     .catch(err => {
       res
