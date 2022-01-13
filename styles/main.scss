@@ -1,14 +1,13 @@
 body {
   background-color: #ACE9D4;
   padding-top: 8em;
-  // display: flex;
-  // flex-direction: row;
-  // justify-content: space-around;
+
  }
  .container-1{
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  margin-bottom: 2em;
 
 
   .p1{
@@ -17,7 +16,6 @@ body {
     header{
       height: 300px;
       width: 200px;
-      // background-image: url("/png/sanitizer.jpg");
       background-size: cover;
       border-radius: 5%;
 }
@@ -28,7 +26,6 @@ body {
     header{
       width: 300px;
       height: 300px;
-      // background-image: url("/png/lysol.jpg");
       background-size: cover;
       border-radius: 5%;
 
@@ -37,9 +34,8 @@ body {
       .p3{
         border: black 1px solid;
         header{
-          width: 300px;
+          width: 400px;
           height: 300px;
-          // background-image: url("/png/rapidtest.jpg");
           background-size: cover;
           border-radius: 5%;
 
@@ -51,6 +47,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  margin-bottom: 2em;
 
   .p4{
 border: black 1px solid;
@@ -67,6 +64,7 @@ border: black 1px solid;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  margin-bottom: 2em;
 
   .p7{
 border: black 1px solid;

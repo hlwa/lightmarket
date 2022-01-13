@@ -6,7 +6,7 @@ const addProduct = (product) => {
     VALUES ($1, $2, $3, $4, $5, $6, $7);`, [product.id, product.name, product.seller_id, product.price, product.sold, product.description, product.url]
     )
     .then((result) => {
-      console.log(result.rows[0]);
+      // console.log(result.rows[0]);
       return result.rows[0];
     })
     .catch(err => console.log(err));
@@ -18,7 +18,7 @@ const getAllProducts = () => {
     .query(`SELECT *
   FROM products`)
     .then((result) => {
-      console.log(result.rows);
+      // console.log(result.rows);
       return result.rows;
     });
 };
@@ -42,7 +42,7 @@ const getWishProductsByUserId  = (id) => {
     JOIN users ON user_id = users.id
     WHERE users.id = $1`, [id])
     .then((result) => {
-      console.log(`result:`, result.rows);
+      // console.log(`result:`, result.rows);
       return result.rows;
     })
     .catch(err => console.log(err));
@@ -59,7 +59,7 @@ const getOrdersProductsByUserId = (id) => {
     WHERE orders.user_id = $1`,[id])
 
     .then((response) => {
-      console.log(response.rows);
+      // console.log(response.rows);
       return response.rows;
     })
     .catch(err => console.log(err));
@@ -72,7 +72,7 @@ const getProductsByOrderId = (id) => {
   JOIN orders ON orders.user_id  = order_items.user_id
   WHERE orders.id = $1`, [id])
     .then((response) => {
-      console.log(response.rows);
+      // console.log(response.rows);
       return response.rows;
     })
     .catch(err => console.log(err));
@@ -84,7 +84,7 @@ const getProductsByFilter = (minPrice, maxPrice) => {
       .query(`SELECT * FROM products
               WHERE price >= $1 AND price <= $2`,[minPrice, maxPrice])
       .then((response) => {
-        console.log(response.rows);
+        // console.log(response.rows);
         return response.rows;
       });
   } else if (minPrice) {
@@ -93,7 +93,7 @@ const getProductsByFilter = (minPrice, maxPrice) => {
                 WHERE price >= $1
               `,[minPrice])
       .then((response) => {
-        console.log(response.rows);
+        // console.log(response.rows);
         return response.rows;
       });
   } else if (maxPrice) {
@@ -102,11 +102,21 @@ const getProductsByFilter = (minPrice, maxPrice) => {
                 WHERE price <= $1
               `, [maxPrice])
       .then((response) => {
-        console.log(response.rows);
+        // console.log(response.rows);
         return response.rows;
       })
       .catch(err => console.log(err));
   }
+
+  return db
+    .query(`SELECT * FROM products
+          `)
+    .then((response) => {
+      // console.log(response.rows);
+      return response.rows;
+    })
+    .catch(err => console.log(err));
+
 };
 
 const getProductsByCartId = (id) => {
@@ -116,7 +126,7 @@ const getProductsByCartId = (id) => {
               JOIN products ON product_id = products.id
               WHERE cart_items.id = $1`, [id])
     .then((result) => {
-      console.log(result.rows);
+      // console.log(result.rows);
       return result.rows;
     })
     .catch(err => console.log(err));
@@ -130,7 +140,7 @@ const addProductToCart = (id, userId, productId) => {
       VALUES ($1, $2, $3);`,[id, userId, productId]
     )
     .then((response) => {
-      console.log(response.rows);
+      // console.log(response.rows);
       return response.rows;
     })
     .catch(err => console.log(err));
@@ -153,7 +163,7 @@ const removeProductFromWishItemsById = (id) => {
     .query(`DELETE FROM wish_items
               WHERE product_id = $1`, [id])
     .then((response) => {
-      console.log(response.rows);
+      // console.log(response.rows);
       return response.rows;
     })
     .catch(err => console.log(err));
@@ -163,6 +173,16 @@ const removeProductFromCartById = (id) => {
   return db
     .query(`DELETE FROM cart_items
               WHERE product_id = $1`, [id])
+    .then((response) => {
+      return response.rows;
+    })
+    .catch(err => console.log(err));
+};
+
+const removeProductByid = (id) => {
+  return db
+    .query(`DELETE FROM products
+    WHERE id = $1`, [id])
     .then((response) => {
       return response.rows;
     })
@@ -182,7 +202,7 @@ module.exports = {
   addProductToCart,
   addProductToWishlist,
   removeProductFromCartById,
-  removeProductFromWishItemsById
-
+  removeProductFromWishItemsById,
+  removeProductByid
 };
 

@@ -45,7 +45,7 @@ app.use("/api/widgets", widgetsRoutes);
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  res.render("index");
+  res.redirect('/products/products_index');
 });
 
 app.listen(PORT, () => {
