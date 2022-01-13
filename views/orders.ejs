@@ -6,47 +6,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="../styles/orders.css">
-  <link rel="stylesheet" href="../styles/header.css">
+
+  <link rel="stylesheet" href="/styles/orders.css">
 
   <title>Orders</title>
 </head>
 
 <body>
   <header><b>
-      <h1>Order Items</h1>
+      <h1> Orders </h1>
     </b></header>
-  <% if (user) { %>
+  <div class=products>
+
     <tbody>
-      <% for(let product in products) { %>
+      <% for(product of products) { %>
         <div class="main-content">
           <div class="container-1">
-            <img src=<%-product.url %>
+            <img src="<%= product.url %>"><br>
           </div>
-          <section class="container-right">
-            <p class="container-2">
-              Name: <%-product.name %><br>
+          <div class="container-2">
+            <%=product.name %><br>
+            <%=product.price %><br>
+          </div>
+          <p class="container-3">
+            <%=product.description %>
+          </p>
 
-                Price: <%-product.price %>
-            </p>
-
-            <p class="container-3">
-              Desciption: <%-product.description %>
-            </p>
-            <form method="POST" action="/wishlist/add_product/<%-product.id %>">
-              <button type="submit">
-                Add
-              </button>
-            </form>
-            <td>
-              <form method="POST" action="/wishlist/delete_product/:id">
-                <button type="Submit" class="btn btn-outline-danger">Delete</button>
-              </form>
-            </td>
-          </section>
-          <% } %>
+        </div>
+        <% } %>
     </tbody>
-    <% } %>
+
+  </div>
+
 </body>
 
 </html>

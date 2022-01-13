@@ -47,7 +47,8 @@ router.get('/wishlist/:user_id', (req, res) => {
     .then((products) => {
       // res.json(products);
       const templateVars = {products};
-      res.render("wishlist", templateVars); //render wishlist.ejs file
+      console.log(products);
+      res.render("wish_items", templateVars); //render wishlist.ejs file
     })
     .catch(err => {
       res
@@ -71,6 +72,7 @@ router.get('/orderlist/:user_id', (req, res) => {
         .json({ error: err.message });
     });
 });
+
 
 //router for single order, need join products and order_items table
 // GET /products/order/:order_id

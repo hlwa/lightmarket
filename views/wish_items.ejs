@@ -6,47 +6,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="../styles/wish_items.css">
-  <link rel="stylesheet" href="../styles/header.css">
+
+  <link rel="stylesheet" href="/styles/wish_items.css">
 
   <title>Product</title>
 </head>
 
 <body>
   <header><b>
-      <h1>Wish List Items</h1>
+      <h1> Wish List Items </h1>
     </b></header>
-  <% if (user) { %>
+  <div class=products>
+
     <tbody>
-      <% for(let product in products) { %>
+      <% for(product of products) { %>
         <div class="main-content">
-          <div class="container-1">
-            <img src=<%-product.url %>
-          </div>
+          <p class="container-2">
+            <%=product.product_name %><br>
+          </p>
+
           <section class="container-right">
-            <p class="container-2">
-              Name: <%-product.name %><br>
-
-                Price: <%-product.price %>
-            </p>
-
-            <p class="container-3">
-              Desciption: <%-product.description %>
-            </p>
-            <form method="POST" action="/wishlist/add_product/<%-product.id %>">
-              <button type="submit">
-                Add
-              </button>
-            </form>
             <td>
-              <form method="POST" action='/products//wishlist/delete_product/<%= product.id %>'>
+              <form method="POST">
                 <button type="Submit" class="btn btn-outline-danger">Delete</button>
               </form>
             </td>
           </section>
-          <% } %>
+        </div>
+        <% } %>
     </tbody>
-    <% } %>
+
+  </div>
+
 </body>
 
 </html>
