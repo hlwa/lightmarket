@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="../styles/productX.css">
+  <link rel="stylesheet" href="../styles/headerX.css">
+
+  <title>Product</title>
+ </head>
+
+  <body>
+    <div class="main-content" >
+      <div class="container-1">
+       <img src= <%-product.url %>
+     
+      </div>
+      <section class="container-right">
+        <p class="container-2">
+          Name: <%-product.name %><br>
+
+          Price: <%-product.price %>
+        </p>
+
+        <p class="container-3">
+          Desciption: <%-product.description %>
+        </p>
+        <form method="POST" action="/wishlist/add_product/<%-product.id %>">
+          <button type="submit">
+            Save to list
+          </button>
+        </form>
+      </section>
+    </div>
+  </body>
+</html>
+
+
+

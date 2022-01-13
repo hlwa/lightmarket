@@ -1,10 +1,12 @@
 // Client facing scripts here
 
 const renderProducts = (products) => {
+  $('.container-1').empty()
   products.forEach(product => {
     let singleProduct = createProductElement(product)
     $('.filtered-products').append(singleProduct)
   });
+
 }
 
 const createProductElement = (product) => {

@@ -135,21 +135,21 @@ router.get('/checkout/:product_id', (req, res) => {
 //     });
 // });
 
-//router for price filter, need join products and order_items table
-// POST /products/price_filter
-router.post('/filter', (req, res) => {
-  let {minPrice, maxPrice} = req.body;
-  productQueries.getProductsByFilter(minPrice, maxPrice)
-    .then((products) => {
-      const templateVars = {products};
-      res.render("products_index.ejs", templateVars);//render products_list.ejs file
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-});
+// //router for price filter, need join products and order_items table
+// // POST /products/price_filter
+// router.post('/filter', (req, res) => {
+//   let {minPrice, maxPrice} = req.body;
+//   productQueries.getProductsByFilter(minPrice, maxPrice)
+//     .then((products) => {
+//       const templateVars = {products};
+//       res.render("products_index.ejs", templateVars);//render products_list.ejs file
+//     })
+//     .catch(err => {
+//       res
+//         .status(500)
+//         .json({ error: err.message });
+//     });
+// });
 
 // // This route is for testing for post,put and delete
 // router.get('/test/test', (req, res) => {
@@ -166,7 +166,7 @@ router.post('/filter', (req, res) => {
 //     });
 // });
 
-//router for price filter, need join products and order_items table
+// router for price filter, need join products and order_items table
 // POST /products/price_filter
 router.post('/filter', (req, res) => {
   let {minPrice, maxPrice} = req.body;
