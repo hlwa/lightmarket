@@ -96,7 +96,7 @@ router.get('/admin/:user_id', (req, res) => {
     //res.json(products);
     //render index.ejs file
       const templateVars = {products};
-      res.render("index", templateVars);
+      res.render("admin_index", templateVars);
     })
     .catch(err => {
       res
@@ -119,14 +119,30 @@ router.get('/checkout/:product_id', (req, res) => {
         .json({ error: err.message });
     });
 });
-//<<<<<<<<<<<<<<<<Cart feature is stretch>>>>>>>>>>>>>>>>
-//GET /products/cart/:user_id
-router.get('/cart/:user_id', (req, res) => {
-  productQueries.getCartProductsByUserId(req.params.user_id)//
+// //<<<<<<<<<<<<<<<<Cart feature is stretch>>>>>>>>>>>>>>>>
+// //GET /products/cart/:user_id
+// router.get('/cart/:user_id', (req, res) => {
+//   productQueries.getCartProductsByUserId(req.params.user_id)//
+//     .then((products) => {
+//       // res.json(products);
+//       const templateVars = {products};
+//       res.render("cart", templateVars);//render .ejs file
+//     })
+//     .catch(err => {
+//       res
+//         .status(500)
+//         .json({ error: err.message });
+//     });
+// });
+
+//router for price filter, need join products and order_items table
+// POST /products/price_filter
+router.post('/filter', (req, res) => {
+  let {minPrice, maxPrice} = req.body;
+  productQueries.getProductsByFilter(minPrice, maxPrice)
     .then((products) => {
-      // res.json(products);
       const templateVars = {products};
-      res.render("cart", templateVars);//render .ejs file
+      res.render("products_index.ejs", templateVars);//render products_list.ejs file
     })
     .catch(err => {
       res
@@ -150,29 +166,16 @@ router.get('/test/test', (req, res) => {
     });
 });
 
-//router for price filter, need join products and order_items table
-// POST /products/price_filter
-router.post('/filter', (req, res) => {
-  let {minPrice, maxPrice} = req.body;
-  productQueries.getProductsByFilter(minPrice, maxPrice)
-    .then((products) => {
-      const templateVars = {products};
-      res.render("test", templateVars);//render products_list.ejs file
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-});
-
 //POST /products/delete_product   removeProductByid
-router.delete('/product/:id', (req, res) => {
+router.post('/delete/:id', (req, res) => {
   productQueries.removeProductByid(req.params.id)
-    .then((products) => {
-      res.json(products);
-      // res.render("admin_center", templateVars) //render .ejs file
-    })
+    .then(productQueries.getAllProducts()
+      .then((products) => {
+        const templateVars = { products }; //use test.ejs for testing
+        console.log(products[0]);
+        res.render("test", templateVars);
+        // res.render("admin_index", templateVars)
+      }))
     .catch(err => {
       res
         .status(500)
@@ -184,8 +187,10 @@ router.delete('/product/:id', (req, res) => {
 router.put('/product/:id', (req, res) => {
   productQueries.editProductByid(req.params.id)
     .then((products) => {
-      res.json(products);
-      // res.render("admin_center", templateVars) //render .ejs file
+      // res.json(products);
+      const templateVars = {products};
+      res.render("products_index", templateVars);
+      // res.render("admin_index", templateVars)
     })
     .catch(err => {
       res
@@ -198,8 +203,10 @@ router.put('/product/:id', (req, res) => {
 router.post('/product/:id', (req, res) => {
   productQueries.addProduct(req.params.id)//>>>>>>>>>>>>>should be product be prameter
     .then((products) => {
-      res.json(products);
-      // res.render("admin_center", templateVars) //render .ejs file
+      // res.json(products);
+      const templateVars = {products};
+      res.render("index", templateVars);
+      // res.render("admin_index", templateVars) //render .ejs file
     })
     .catch(err => {
       res
@@ -208,40 +215,42 @@ router.post('/product/:id', (req, res) => {
     });
 });
 
-//<<<<<<<<<<<<<<<<<<<Cart feature is stretch>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-//POST /products/cart/add_product   addProducttoCart
-router.post('/cart/:car_id/product/:prodcut_id', (req, res) => {
-  productQueries.addProducttoCart(req.params.car_id,req.params.prodcut_id)
-    .then((products) => {
-      res.json(products);
-      // res.render("cart", templateVars) //render .ejs file
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-});
-//<<<<<<<<<<<<<<<<<<<Cart feature is stretch>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-//POST /products/cart/delete_product   removeProductFromCartByid
-router.delete('/cart/product/:id', (req, res) => {
-  productQueries.removeProductFromCartByid(req.params.id)
-    .then((products) => {
-      res.json(products);
-      // res.render("cart", templateVars) //render .ejs file
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-});
+// //<<<<<<<<<<<<<<<<<<<Cart feature is stretch>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// //POST /products/cart/add_product   addProducttoCart
+// router.post('/cart/:car_id/product/:prodcut_id', (req, res) => {
+//   productQueries.addProducttoCart(req.params.car_id,req.params.prodcut_id)
+//     .then((products) => {
+//       res.json(products);
+//       // res.render("cart", templateVars) //render .ejs file
+//     })
+//     .catch(err => {
+//       res
+//         .status(500)
+//         .json({ error: err.message });
+//     });
+// });
+// //<<<<<<<<<<<<<<<<<<<Cart feature is stretch>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// //POST /products/cart/delete_product   removeProductFromCartByid
+// router.delete('/cart/product/:id', (req, res) => {
+//   productQueries.removeProductFromCartByid(req.params.id)
+//     .then((products) => {
+//       res.json(products);
+//       // res.render("cart", templateVars) //render .ejs file
+//     })
+//     .catch(err => {
+//       res
+//         .status(500)
+//         .json({ error: err.message });
+//     });
+// });
 
 //POST /products/wishlist/add_product   addProducttoWishlist
 router.post('/wishlist/add_product/:id', (req, res) => {
   productQueries.addProductToWishlist(req.params.id)
     .then((products) => {
-      res.json(products);
+      // res.json(products);
+      const templateVars = {products};
+      res.render("wishlist", templateVars);
       // res.render("wishlist", templateVars) //render .ejs file
     })
     .catch(err => {
@@ -256,7 +265,9 @@ router.delete('/wishlist/delete_product/:id', (req, res) => {
   productQueries.removeProductFromWishlist(req.params.id)
     .then((products) => {
       res.json(products);
-      // res.render("cart", templateVars) //render .ejs file
+      const templateVars = {products};
+      res.render("wishlist", templateVars);
+      // res.render("wishlist", templateVars) //render .ejs file
     })
     .catch(err => {
       res
