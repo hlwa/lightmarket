@@ -12,7 +12,6 @@ VALUES(
 - Kills over 100 illness causing germs, including cold & flu viruses
 - Kills 99.9% of odor causing bacteria
 - Kills over 100 illness causing germs including the virus that causes covid19 (sars-cov-2) on-hard non-porus surfaces', '/png/lysol.jpg'
->>>>>>> d2f15f2f9b26ef52a7fac72d676e5279bde14533
  ),
 
 (3, 'RAPID COVID-19 ANTIGEN TEST KIT (5-PACK)', 1, '80.00',False,  '
@@ -23,7 +22,7 @@ Each Rapid Test Kit Contains:
 - 5 x individually packed buffers
 - 5 x tubes and nozzles
 - 1 x Tube stand
-- 1 x Product insert', 'png/rapidtest.jpg'
+- 1 x Product insert', '/png/rapidtest.jpg'
 
 ),
 
