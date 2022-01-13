@@ -5,11 +5,8 @@ VALUES(
   - Purell Instant Hand Sanitizer kills 99.99% of germs with a refreshing gel', "'png/sanitizer.jpg'"
 ),
 
-<<<<<<< HEAD
-(2,'Lysol Handi-pack Disinfecting Wipes',1, '14.99', False, '
-- 80 Count (Pack of 4
-- Lysol Disinfecting Wipes can be used as a convenient way to clean and disinfect your household surfaces', 'https://images.unsplash.com/photo-1611762820957-d81b7aaa7d42?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1748&q=80'
-=======
+
+
 (2,'Lysol Disinfectant Spray',1, '14.99', False, '
 - Kills 99.99% of viruses & bacteria
 - Kills over 100 illness causing germs, including cold & flu viruses
