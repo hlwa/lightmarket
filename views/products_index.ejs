@@ -23,9 +23,9 @@
 
   <%- include("partials/header") %>
 
-<div class="filtered-products">
+    <div class="filtered-products">
 
-</div>
+    </div>
 
     <div class="filter">
       <form method="POST" action='/products/filter'>
@@ -43,16 +43,20 @@
           Availability:<%= product.sold %>
             <header>
               <img src="<%= product.url %>">
-              <p>
-                <%= product.url %>
-              </p>
             </header>
             <footer>
               <div>
                 <%= product.name %> $<%= product.price %>
               </div>
-              <i class="fas fa-heart"></i>
-              <i class="fas fa-cart-plus"></i>
+              <form method="POST" action="/products/wish_items/<%= product.id %>">
+                <button><i class="fas fa-heart"></i></button>
+              </form>
+
+              <form method="POST" action="/wishlist/add_product/:id">
+                <button><i class="fas fa-cart-plus"></i></button>
+              </form>
+
+
             </footer>
         </div>
       </div>
