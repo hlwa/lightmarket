@@ -40,7 +40,11 @@
     <% for(let product of products) { %>
       <div class="container-1">
         <div class="p1">
-          Availability:<%= product.sold %>
+          <% if(product.sold ) {%>
+             Availability:Sold
+             <% } else {%>
+            Availability:Availabile
+            <% }%>
             <header>
               <img src="<%= product.url %>">
             </header>

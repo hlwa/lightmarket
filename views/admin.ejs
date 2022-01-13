@@ -48,12 +48,12 @@
               <div>
                 <%= product.name %> $<%= product.price %>
               </div>
-              <form method="POST" action="">
-                <button>Edit</button>
+              <form method="POST" action='/products/marksold/<%= product.id %>'>
+                <button>Mark As Sold</button>
               </form>
 
               <form>
-                <button>Post</i></button>
+                <a href="/products/admin/add/product">Post</a>
               </form>
 
 

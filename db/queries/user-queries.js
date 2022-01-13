@@ -5,7 +5,7 @@ const getUserById = (id) => {
   FROM users
   WHERE id = $1`, [id])
     .then((result) => {
-      console.log(result.rows[0]);
+      // console.log(result.rows[0]);
       return result.rows[0];
     })
     .catch(err => console.log(err));

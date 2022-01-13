@@ -157,6 +157,27 @@ const addProductToWishlist = (id, userId, productId) => {
     .catch(err => console.log(err));
 };
 
+const addToOrderItems = (id, userId, productId) => {
+  return db
+    .query(`INSERT INTO order_items ( id, user_id, product_id)
+      VALUES ($1, $2, $3);`,[id, userId, productId]
+    )
+    .then((response) => {
+      return response.rows;
+    })
+    .catch(err => console.log(err));
+};
+
+const addToOrderlist = (id, userId, time) => {
+  return db
+    .query(`INSERT INTO orders ( id, user_id, created_at)
+      VALUES ($1, $2, $3);`,[id, userId, time]
+    )
+    .then((response) => {
+      return response.rows;
+    })
+    .catch(err => console.log(err));
+};
 
 const removeProductFromWishItemsById = (id) => {
   return db
@@ -215,5 +236,7 @@ module.exports = {
   removeProductFromWishItemsById,
   removeProductByid,
   editProductByid,
+  addToOrderItems,
+  addToOrderlist,
 };
 

@@ -15,26 +15,31 @@
   <body>
     <% include('partials/header') %>
     <header><b><h1><%-product.name %></h1></b></header>
+    <form method="POST" action="/products/checkout/<%-product.id %>">
+        <div><%-user.username %></div>
+        <div><%-user.mobile %></div>
+        <div><%-user.country %></div>
+        <div><%-user.province %></div>
+        <div><%-user.city %></div>
+        <div><%-user.street %></div>
+        <div><%-user.postal %></div>
+        <button type="send" class="btn btn-outline-primary">Deliver And Cash</button>
+    </form>
+
+
     <div class="main-content" >
       <div class="container-1">
-       <img src= <%-product.url %>
-      <a href=https://www.pngall.com/wp-content/uploads/5/Hand-Sanitizer-PNG-Free-Download.png></a>
+        <img src="<%= product.url %>">
       </div>
       <section class="container-right">
         <p class="container-2">
           Name: <%-product.name %><br>
-
           Price: <%-product.price %>
         </p>
 
         <p class="container-3">
           Desciption: <%-product.description %>
         </p>
-        <form method="POST" action="/products/wishlist/add_product/<%-product.id %>">
-          <button type="submit">
-            Save to list
-          </button>
-        </form>
       </section>
     </div>
   </body>
