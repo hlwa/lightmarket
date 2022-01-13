@@ -151,29 +151,28 @@ router.post('/filter', (req, res) => {
     });
 });
 
-// This route is for testing for post,put and delete
-router.get('/test/test', (req, res) => {
-  productQueries.getAllProducts()
-    .then((products) => {
-      // res.json(products);
-      const templateVars = {products};//use test.ejs for testing
-      res.render("test",templateVars);//products_index.ejs
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-});
+// // This route is for testing for post,put and delete
+// router.get('/test/test', (req, res) => {
+//   productQueries.getAllProducts()
+//     .then((products) => {
+//       // res.json(products);
+//       const templateVars = {products};//use test.ejs for testing
+//       res.render("test",templateVars);//products_index.ejs
+//     })
+//     .catch(err => {
+//       res
+//         .status(500)
+//         .json({ error: err.message });
+//     });
+// });
 
 //router for price filter, need join products and order_items table
 // POST /products/price_filter
 router.post('/filter', (req, res) => {
   let {minPrice, maxPrice} = req.body;
-  console.log(minPrice,maxPrice)
   productQueries.getProductsByFilter(minPrice, maxPrice)
     .then((products) => {
-      res.status(200).json({products})
+      res.status(200).json({products});
     })
     .catch(err => {
       res
@@ -181,34 +180,31 @@ router.post('/filter', (req, res) => {
         .json({ error: err.message });
     });
 });
+
 
 
 //POST /products/delete_product   removeProductByid
 router.post('/delete/:id', (req, res) => {
   productQueries.removeProductByid(req.params.id)
-    .then(productQueries.getAllProducts()
-      .then((products) => {
-        const templateVars = { products }; //use test.ejs for testing
-        console.log(products[0]);
-        res.render("test", templateVars);
-        // res.render("admin_index", templateVars)
-      }))
+    .then(res.redirect('/products/admin/:user_id'))
     .catch(err => {
       res
         .status(500)
         .json({ error: err.message });
     });
+  productQueries.getAllProducts()
+    .then((products) => {
+      const templateVars = { products }; //use test.ejs for testing
+      res.render("admin_index", templateVars);
+    // res.render("admin_index", templateVars)
+    });
+
 });
 
 //POST /products/edit_product   editProductByid
-router.put('/product/:id', (req, res) => {
-  productQueries.editProductByid(req.params.id)
-    .then((products) => {
-      // res.json(products);
-      const templateVars = {products};
-      res.render("products_index", templateVars);
-      // res.render("admin_index", templateVars)
-    })
+router.post('/marksold/:id', (req, res) => {
+  productQueries.editProductByid(req.params.id)//mark as sold
+    .then(res.redirect('/products/admin/:user_id'))//redirect('/products/admin/:user_id'))
     .catch(err => {
       res
         .status(500)
@@ -216,9 +212,20 @@ router.put('/product/:id', (req, res) => {
     });
 });
 
+//helper
+const randomNum = (n) => {
+  let res = "";
+  for (let i = 0; i < n; i++) {
+    res += Math.floor(Math.random() * 10);
+  }
+  return res;
+};
+
+
 //POST /products/add_product addProduct
-router.post('/product/:id', (req, res) => {
-  productQueries.addProduct(req.params.id)//>>>>>>>>>>>>>should be product be prameter
+router.post('/add_product/:id', (req, res) => {
+  let {id = randomNum(5), name, seller_id = req.cookies.id, price, sold, description, url} = req.body;
+  productQueries.addProduct({id, name, seller_id, price, sold, description, url})//>>>>>>>>>>>>>should be product be prameter
     .then((products) => {
       // res.json(products);
       const templateVars = {products};

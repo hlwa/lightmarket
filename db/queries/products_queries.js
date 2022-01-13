@@ -189,6 +189,16 @@ const removeProductByid = (id) => {
     .catch(err => console.log(err));
 };
 
+const editProductByid = (id) => {
+  return db
+    .query(`UPDATE products
+    SET sold = true
+    WHERE id = $1`, [id])
+    .then((response) => {
+      return response.rows;
+    })
+    .catch(err => console.log(err));
+};
 
 module.exports = {
   addProduct,
@@ -203,6 +213,7 @@ module.exports = {
   addProductToWishlist,
   removeProductFromCartById,
   removeProductFromWishItemsById,
-  removeProductByid
+  removeProductByid,
+  editProductByid,
 };
 

@@ -5,18 +5,15 @@
 </head>
 <body>
     <div class="table-data">
-
-<h2>Display Data using Node.js & MySQL</h2>
-
-
 <h2>Display Data using Express, Node.js & PSQL</h2>
 <% for(let product of products) { %>
 
   <div><%= product.id %></div>
   <div><%= product.name %></div>
+  <div><%= product.sold %></div>
 
-  <form method="post" action='/products/delete/<%= product.id %>'>
-    <button type="send" class="btn btn-outline-primary">delete</button>
+  <form method="post" action='/products/marksold/<%= product.id %>'>
+    <button type="send" class="btn btn-outline-primary">Mark as Sold</button>
   </form>
 
 <% } %>
