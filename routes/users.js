@@ -21,7 +21,7 @@ const userQueries = require('../db/queries/user-queries');
 
 //"GET"  /login/:id  getUserByid
 
-router.get("/login/:id", (req, res) => {
+router.get("/login/:id", (req, res) => {//right path: http://localhost:8080/api/users/login/1
   userQueries.getUserById(req.params.id)
     .then(user => {
       // res.json(user);
@@ -29,7 +29,7 @@ router.get("/login/:id", (req, res) => {
       res.cookie('id', `${user.id}`);
       res.cookie('seller', `${user.seller}`);
       res.cookie('username', `${user.username}`);
-      res.redirect('/login/products_index');
+      res.redirect('/products/');
       // res.render("test");//render login.ejs file
     })
     .catch(err => {

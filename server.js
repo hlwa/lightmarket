@@ -12,9 +12,13 @@ const morgan = require("morgan");
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan("dev"));
-
+const bodyParser = require("body-parser");
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({extended: true}));
+
 
 app.use(
   "/styles",
