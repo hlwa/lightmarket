@@ -205,7 +205,7 @@ router.post('/product/:id', (req, res) => {
     .then((products) => {
       // res.json(products);
       const templateVars = {products};
-      res.render("index", templateVars);
+      res.render("admin_index", templateVars);
       // res.render("admin_index", templateVars) //render .ejs file
     })
     .catch(err => {
