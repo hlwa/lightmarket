@@ -1,6 +1,6 @@
 const express = require('express');
-const bodyParser = require("body-parser");
 const app = express();
+const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -42,12 +42,15 @@ router.get('/:id', (req, res) => {
 
 //router for wishlist, need join wish and users table
 // GET /products/wishlist/:user_id
-router.get('/wishlist/:user_id', (req, res) => {
-  productQueries.getWishProductsByUserId(req.params.user_id)
+router.get('/wishlist/wishlist', (req, res) => {
+  // console.log(req.cookies);
+  const id = req.cookies.id;
+  console.log(id);
+  productQueries.getWishProductsByUserId(id)//req.params.user_id
     .then((products) => {
       // res.json(products);
       const templateVars = {products};
-      res.render("wishlist", templateVars); //render wishlist.ejs file
+      res.render("wish_items", templateVars); //render wishlist.ejs file
     })
     .catch(err => {
       res
@@ -222,16 +225,15 @@ const randomNum = (n) => {
 };
 
 
+
 //POST /products/add_product addProduct
-router.post('/add_product/:id', (req, res) => {
-  let {id = randomNum(5), name, seller_id = req.cookies.id, price, sold, description, url} = req.body;
+router.post('/add_product', (req, res) => {
+  const seller_id = 1 || req.cookies.id;
+  const id = randomNum(5);
+  const sold = false;
+  let {name, price, description, url} = req.body;
   productQueries.addProduct({id, name, seller_id, price, sold, description, url})//>>>>>>>>>>>>>should be product be prameter
-    .then((products) => {
-      // res.json(products);
-      const templateVars = {products};
-      res.render("admin_index", templateVars);
-      // res.render("admin_index", templateVars) //render .ejs file
-    })
+    .then(res.redirect('/products/'))
     .catch(err => {
       res
         .status(500)
@@ -268,14 +270,16 @@ router.post('/add_product/:id', (req, res) => {
 //     });
 // });
 
-//POST /products/wishlist/add_product   addProducttoWishlist
-router.post('/wishlist/add_product/:id', (req, res) => {
-  productQueries.addProductToWishlist(req.params.id)
+
+
+// This route is for testing for post,put and delete
+router.get('/test/test', (req, res) => {
+  productQueries.getAllProducts()
     .then((products) => {
       // res.json(products);
-      const templateVars = {products};
-      res.render("wishlist", templateVars);
-      // res.render("wishlist", templateVars) //render .ejs file
+
+      const templateVars = {products};//use test.ejs for testing
+      res.render("test",templateVars);//products_index.ejs
     })
     .catch(err => {
       res
@@ -284,15 +288,22 @@ router.post('/wishlist/add_product/:id', (req, res) => {
     });
 });
 
-//POST /products/wishlist/delete_product   removeProductFromWishlist
-router.delete('/wishlist/delete_product/:id', (req, res) => {
-  productQueries.removeProductFromWishlist(req.params.id)
-    .then((products) => {
-      res.json(products);
-      const templateVars = {products};
-      res.render("wishlist", templateVars);
-      // res.render("wishlist", templateVars) //render .ejs file
-    })
+
+//POST /products/wishlist/add_product   addProducttoWishlist
+router.post('/wishlist/add_product/:id', (req, res) => {
+  productQueries.addProductToWishlist(req.params.id)
+    .then(res.redirect('/products//wishlist/wishlist'))
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
+
+
+router.post('/wishlist/delete_product/:id', (req, res) => {
+  productQueries.removeProductFromWishItemsById(req.params.id)
+    .then(res.redirect('/products/wishlist/wishlist'))
     .catch(err => {
       res
         .status(500)

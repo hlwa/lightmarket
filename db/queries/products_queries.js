@@ -36,9 +36,9 @@ const getProductById = (id) => {
 
 const getWishProductsByUserId  = (id) => {
   return db
-    .query(`SELECT products.name as product_name, users.username as name
-    FROM wish_items
-    JOIN products ON  product_id = products.id
+    .query(`SELECT *
+    FROM products
+    JOIN wish_items ON  product_id = products.id
     JOIN users ON user_id = users.id
     WHERE users.id = $1`, [id])
     .then((result) => {
