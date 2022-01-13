@@ -6,17 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="../styles/productX.css">
-  <link rel="stylesheet" href="../styles/headerX.css">
+  <link rel="stylesheet" href="../styles/product.css">
+  <link rel="stylesheet" href="../styles/header.css">
 
   <title>Product</title>
  </head>
 
   <body>
+    <% include('partials/header') %>
+    <header><b><h1><%-product.name %></h1></b></header>
     <div class="main-content" >
       <div class="container-1">
        <img src= <%-product.url %>
-     
+
       </div>
       <section class="container-right">
         <p class="container-2">
