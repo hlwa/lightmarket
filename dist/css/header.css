@@ -11,14 +11,16 @@ nav {
   z-index: 1;
   width: 100%;
 }
+
 .nav-title {
   font-size: 40px;
   margin-left: 0.5em;
 }
+
 .nav-options {
   margin-left: auto;
   font-size: 20px;
   display: flex;
   flex-direction: row;
   justify-content: center;
-}
+}/*# sourceMappingURL=header.css.map */

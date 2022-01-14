@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
   <meta charset="utf-8">
@@ -8,26 +9,29 @@
 
   <link rel="stylesheet" href="../styles/add-product.css">
 
-  <link rel="stylesheet" href="../styles/header.css">
+  <link rel="stylesheet" href="/styles/header.css" type="text/css" />
 
   <title>Test Page For Add Order</title>
 
 </head>
+
 <body>
-<div class="table-data">
-<h2>Add Order Page</h2>
-<form method="POST" action='/products/add_product'>
-  <div>name</div>
-  <input type="text" id="name" name="name"><br>
-  <div>price</div>
-  <input type="text" id="price" name="price">
-  <div>description</div>
-  <input type="text" id="description" name="description"><br>
-  <div>url</div>
-  <input type="text" id="url" name="url"><br>
-  <button type="send" class="btn btn-outline-primary">Add products</button>
-</form>
+  <%- include("partials/header") %>
+  <div class="table-data">
+    <h2>Add Order Page</h2>
+    <form method="POST" action='/products/add_product'>
+      <div>name</div>
+      <input type="text" id="name" name="name"><br>
+      <div>price</div>
+      <input type="text" id="price" name="price">
+      <div>description</div>
+      <input type="text" id="description" name="description"><br>
+      <div>url</div>
+      <input type="text" id="url" name="url"><br>
+      <button type="send" class="btn btn-outline-primary">Add products</button>
+    </form>
     </table>
-    </div>
+  </div>
 </body>
+
 </html>

@@ -1,4 +1,39 @@
-.message-box{
-  border-radius: 25px;
-  border: 5px solid red;
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: solid black;
+  background-color: #f8ebd6;
+  border-radius: 5px;
+  margin-left: 45px;
+  margin-right: 45px;
+  p {
+    border: transparent;
+    padding: 12px 12px;
+    border-radius: 25px;
+    box-shadow: rgba(2, 8, 20, 0.3) 0px 1em 1.175em,
+      rgba(2, 8, 20, 0.1) 0px 0.295em 1em;
+  }
+}
+#message-buyer-seller {
+  input {
+    border: solid black;
+    padding: 3px 10px;
+    border-radius: 10px;
+    padding-right: 220px;
+    height: 50px;
+    box-shadow: rgba(2, 8, 20, 0.3) 0px 1em 1.175em,
+      rgba(2, 8, 20, 0.1) 0px 0.295em 1em;
+  }
+  button {
+    background-color: #4a82de;
+    color: white;
+    border: transparent;
+    padding: 3px 10px;
+    border-radius: 10px;
+    width: 75px;
+    justify-content: center;
+    box-shadow: rgba(2, 8, 20, 0.6) 0px 1em 1.175em,
+      rgba(2, 8, 20, 0.1) 0px 0.295em 1em;
+  }
 }

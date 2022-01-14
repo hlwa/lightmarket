@@ -21,12 +21,15 @@
 
 
 <body>
-  <%- include("partials/header") %>
-  <h1 style="padding-top: 130px; display: flex; justify-content: center;">Messages blahh</h1>
-    <div class="message-box">
-      <form method="POST" action="" id="chatbox">
-        <input type="text" name="message" id="message-input"></input>
-        <button type="submit" value="submit" id="send-message">Send</button>
+  <%- include('partials/_header') %>
+    <h1 style="padding-top: 130px; display: flex; justify-content: center;">Messages</h1>
+    <div class="message">
+
+      <p id="admin" style="display:  background-color: #4a82de; color: white"></p>
+
+      <p id="user" style="display:  background-color: green; color: white"">
+        <form method=" POST" action="" id=""> <input type="text" name="message" ></input>
+        <button type="submit" >Send</button>
       </form>
     </div>
 </body>
