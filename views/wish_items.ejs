@@ -9,7 +9,7 @@
 
   <link rel="stylesheet" href="/styles/wish_items.css">
 
-  <title>Product</title>
+  <title>Wish List Items</title>
 </head>
 
 <body>
@@ -21,18 +21,27 @@
     <tbody>
       <% for(product of products) { %>
         <div class="main-content">
-          <p class="container-2">
-            <%=product.product_name %><br>
-          </p>
+          <div class="container-1">
+            <img src="<%= product.url %>">
+          </div>
 
           <section class="container-right">
-            <td>
+
+              <div >
+                <%=product.name %><br>
+                <%=product.price %><br>
+              </div>
+
+              <div >
+                <%=product.description %><br>
+              </div>
+
 
               <form method="POST" action='/products/wishlist/delete_product/<%= product.id %>'>
 
                 <button type="Submit" class="btn btn-outline-danger">Delete</button>
               </form>
-            </td>
+
           </section>
         </div>
         <% } %>
