@@ -1,0 +1,16 @@
+body{
+
+display: flex;
+flex-direction: column;
+justify-content: center;
+.items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1em;
+  .admin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+}
