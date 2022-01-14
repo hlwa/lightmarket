@@ -26,6 +26,13 @@ router.get("/login/:id", (req, res) => {
       res.cookie('id', `${user.id}`);
       res.cookie('seller', `${user.seller}`);
       res.cookie('username', `${user.username}`);
+      res.cookie('email', `${user.email}`);
+      res.cookie('mobile ', `${user.mobile}`);
+      res.cookie('country', `${user.country}`);
+      res.cookie('province', `${user.province}`);
+      res.cookie('city ', `${user.city}`);
+      res.cookie('street', `${user.street}`);
+      res.cookie('postal', `${user.postal}`);
       res.redirect('/products/');
       // res.render("test");//render login.ejs file
     })
@@ -40,7 +47,7 @@ router.post("/login/logout", (req, res) => {
   res.clearCookie('id');
   res.clearCookie('seller');
   res.clearCookie('username');
-  res.redirect('/products/products_index');
+  res.redirect('/products/');
 });
 
 

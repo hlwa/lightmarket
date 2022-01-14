@@ -6,15 +6,13 @@ body {
   display: flex;
   flex-direction: row;
   padding-bottom: 2em;
-  margin-left: 100em;
+  margin-right: 50em;
 }
-
 .items {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 1em;
 }
-
 .container-1 {
   padding: 28px 28px;
   border: 2px solid black;
@@ -22,12 +20,11 @@ body {
   border-radius: 10px;
   box-shadow: rgba(2, 8, 20, 0.6) 0px 1em 1.175em,
     rgba(2, 8, 20, 0.08) 0px 0.195em 1em;
-  width: 45em;
+  width: 25em;
   color: black;
-
   img {
-    max-height: 50em;
-    max-width: 40em;
+    max-height: 15em;
+    max-width: 15em;
     border-radius: 5px;
     box-shadow: rgba(2, 8, 20, 0.4) 0px 1em 1.175em,
       rgba(2, 8, 20, 0.1) 0px 0.295em 1em;
@@ -41,9 +38,8 @@ body {
     padding-left: 20px;
     padding: 20px 18px;
     color: black;
-    font-size: 30px;
+    font-size: 20px;
   }
-
   footer{
     display: flex;
     flex-direction:row ;

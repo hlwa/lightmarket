@@ -38,7 +38,7 @@
               </div>
 
               <div class="admin">
-              <form method=form method="POST" action='/products/marksold/<%= product.id %>'>
+              <form method="POST" action='/products/marksold/<%= product.id %>'>
                 <button>Mark Sold</button>
               </form>
 
@@ -46,7 +46,7 @@
                 <button><a href="/products/admin/add/product">Post</a></button>
               </form>
 
-              <form method="post" action='/products/delete/<%= product.id %>'>
+              <form method="POST" action='/products/delete/<%= product.id %>'>
                 <button type="send" class="btn btn-outline-primary">delete</button>
               </form>
             </div>

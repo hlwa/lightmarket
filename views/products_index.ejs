@@ -25,12 +25,12 @@
 
     <div class="filtered-products"></div>
     <div class="filter">
-      <form method="POST" action='/products/filter' class="price-filter">
+      <form method="POST" action='/products/filter/filter/' class="price-filter">
         <div>Minimum price</div>
         <input type="text" id="minPrice" name="minPrice"><br>
         <div>Maximum price</div>
         <input type="text" id="maxPrice" name="maxPrice">
-        <button type="send" class="btn btn-outline-primary">Send</button>
+        <button type="submit" class="btn btn-outline-primary">Filter</button>
       </form>
 
     </div>
@@ -47,7 +47,7 @@
            <% }%>
 
             <header>
-            <a href="products/<%=product.id %>" target="_blank">   <img src="<%= product.url %>" />  </a>
+            <a href="/products/<%=product.id %>" target="_blank">   <img src="<%= product.url %>" />  </a>
 
             </header>
             <footer>

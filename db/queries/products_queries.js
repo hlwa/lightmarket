@@ -7,7 +7,7 @@ const addProduct = (product) => {
     )
     .then((result) => {
       // console.log(result.rows[0]);
-      return result.rows[0];
+      return result.rows;
     })
     .catch(err => console.log(err));
 };
@@ -27,12 +27,13 @@ const getProductById = (id) => {
   return db
     .query(`SELECT *
     FROM products
-    WHERE id = $1`, [id])
+    WHERE id = $1;`, [id])
     .then((result) => {
       return result.rows[0];
     })
     .catch(err => console.log(err));
 };
+
 
 const getWishProductsByUserId  = (id) => {
   return db

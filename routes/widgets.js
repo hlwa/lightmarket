@@ -27,14 +27,11 @@ router.get("/message_page/:id", (req, res) => {
   if (!user) {
     return res.send("<html><body><b>Please signin!</b></body></html>\n");
   }
-  if (!user) {
-    return res.send("<html><body><b>Please signin!</b></body></html>\n");
-  }
   userQueries.getUserById(userId)
     .then(user => {
       const templateVars = {user};
       // res.json(user);
-      res.render("message_page", templateVars);//render message_page.ejs file
+      res.render("Messages", templateVars);//render message_page.ejs file
     })
     .catch(err => {
       res
@@ -45,13 +42,14 @@ router.get("/message_page/:id", (req, res) => {
 
 //"POST"  /message_send/:id  getUserByid
 router.post("/message_page/send/:id", (req, res) => {
-  const user = req.body;
-  const id = req.params.id;
+  const message = req.body;
+  console.log('------------------',message);
+  const id = req.cookies.id;
   client.messages
     .create({
-      body: user.message,
+      body: message.message,
       from: tPHONE,
-      to: user.mobile
+      to: message.mobile
     })
     .then(message => console.log(message.sid))
     .then(res.redirect(`/api/widgets/message_page/${id}`))

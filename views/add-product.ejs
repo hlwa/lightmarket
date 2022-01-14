@@ -19,7 +19,7 @@
   <%- include("partials/header") %>
   <div class="table-data">
     <h2>Add Order Page</h2>
-    <form method="POST" action='/products/add_product'>
+    <form method="POST" action='/products/add_product/<%= user.id %>'>
       <div>name</div>
       <input type="text" id="name" name="name"><br>
       <div>price</div>

@@ -3,21 +3,15 @@
 // and set the environment variables. See http://twil.io/secure
 // load .env data into process.env
 require("dotenv").config();
+const tPHONE = '+19546377158';
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
-const tPHONE = process.env.TWILIO_PHONE;
 const client = require('twilio')(accountSid, authToken);
-
-<<<<<<< HEAD
-let receiver = '+19377773737';
-=======
-
-let message = 'This is the ship that made the Kessel Run in fourteen parsecs?';
 
 client.messages
   .create({
-    body: message,
+    body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
     from: tPHONE,
-    to: receiver
+    to: '+12049221870'
   })
   .then(message => console.log(message.sid));

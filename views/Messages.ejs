@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <title>Home Page</title>
-
+  <title>Send Message</title>
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
@@ -18,20 +16,19 @@
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
 </head>
-
-
 <body>
-  <%- include('partials/_header') %>
-    <h1 style="padding-top: 130px; display: flex; justify-content: center;">Messages</h1>
-    <div class="message">
+    <div class="table-data">
+<h2>Send Message</h2>
+            <div><%= user.username %></div>
+            <form method="POST" action='send/<%= user.id %>'>
+              <div>message</div>
+              <input type="text" id="message" name="message"><br>
+              <div>mobile</div>
+              <input type="text" id="mobile" name="mobile" value="<%= user.mobile %>">
+              <button type="send" class="btn btn-outline-primary">Send</button>
+            </form>
 
-      <p id="admin" style="display:  background-color: #4a82de; color: white"></p>
-
-      <p id="user" style="display:  background-color: green; color: white"">
-        <form method=" POST" action="" id=""> <input type="text" name="message" ></input>
-        <button type="submit" >Send</button>
-      </form>
+    </table>
     </div>
 </body>
-
 </html>

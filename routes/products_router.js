@@ -11,11 +11,11 @@ const userQueries = require('../db/queries/user-queries');
 
 //http://localhost:8080/products/
 router.get('/', (req, res) => {
-  const user = req.cookies.username;
+  const user = {'name':req.cookies.username,'id':req.cookies.id};
   productQueries.getAllProducts()
     .then((products) => {
       // res.json(products);
-      const templateVars = {user,products};//use test.ejs for testing
+      const templateVars = {products,user};//use test.ejs for testing
       res.render("products_index",templateVars);//products_index.ejs
     })
     .catch(err => {
@@ -27,7 +27,7 @@ router.get('/', (req, res) => {
 
 //http://localhost:8080/products/2
 router.get('/:id', (req, res) => {
-  const user = req.cookies.username;
+  const user = {'name':req.cookies.username,'id':req.cookies.id};
   productQueries.getProductById(req.params.id)
     .then((product) => {
       const templateVars = {user,product};
@@ -42,14 +42,13 @@ router.get('/:id', (req, res) => {
 
 //http://localhost:8080/products/wishlist/wishlist
 router.get('/wishlist/wishlist', (req, res) => {
-  const userId = req.cookies.id;
-  const user = req.cookies.username;
+  const user = {'name':req.cookies.username,'id':req.cookies.id};
   if (!user) {
     return res.send("<html><body><b>Please signin!</b></body></html>\n");
   }
-  productQueries.getWishProductsByUserId(userId)
+  productQueries.getWishProductsByUserId(user.id)
     .then((products) => {
-      const templateVars = {products,user,userId};
+      const templateVars = {products,user};
       res.render("wish_items", templateVars);
     })
     .catch(err => {
@@ -61,11 +60,12 @@ router.get('/wishlist/wishlist', (req, res) => {
 
 //http://localhost:8080/products/orderlist/:user_id
 router.get('/orderlist/:user_id', (req, res) => {
-  const user = req.cookies.username;
+  const user = {'name':req.cookies.username,'id':req.cookies.id};
+  console.log(user.id);
   if (!user) {
     return res.send("<html><body><b>Please signin!</b></body></html>\n");
   }
-  productQueries.getOrdersProductsByUserId(req.params.user_id)
+  productQueries.getOrdersProductsByUserId(user.id)
     .then((products) => {
       const templateVars = {products,user};
       res.render("orders", templateVars);
@@ -81,14 +81,13 @@ router.get('/orderlist/:user_id', (req, res) => {
 //http://localhost:8080/products/order/:order_id
 
 router.get('/order/:order_id', (req, res) => {
-  const userId = req.cookies.id;
-  const user = req.cookies.username;
-  if (!user) {
+  const user = {'name':req.cookies.username,'id':req.cookies.id};
+  if (!user.id) {
     return res.send("<html><body><b>Please signin!</b></body></html>\n");
   }
   productQueries.getProductsByOrderId(req.params.order_id)
     .then((products) => {
-      const templateVars = {products, user, userId};
+      const templateVars = {products, user};
       res.render("orders", templateVars);
     })
     .catch(err => {
@@ -100,9 +99,8 @@ router.get('/order/:order_id', (req, res) => {
 
 //http://localhost:8080/products/admin/:user_id
 router.get('/admin/:user_id', (req, res) => {
-  const user = req.cookies.username;
-  console.log(user);
-  if (!user) {
+  const user = {'name':req.cookies.username,'id':req.cookies.id};
+  if (!user.id) {
     return res.send("<html><body><b>Please signin!</b></body></html>\n");
   }
   productQueries.getAllProducts()
@@ -119,7 +117,7 @@ router.get('/admin/:user_id', (req, res) => {
 
 //http://localhost:8080/products/admin/add/product
 router.get('/admin/add/product', (req, res) => {
-  const user = req.cookies.username;
+  const user = {'name':req.cookies.username,'id':req.cookies.id};
   if (!user) {
     return res.send("<html><body><b>Please signin!</b></body></html>\n");
   }
@@ -137,17 +135,28 @@ router.get('/admin/add/product', (req, res) => {
 
 //http://localhost:8080/products/checkout/:product_id
 router.get('/checkout/:product_id', (req, res) => {
-  const userId = req.cookies.id;
-  if (!userId) {
+  const user = {'username':req.cookies.username,
+    'id':req.cookies.id,
+    'seller':req.cookies.seller,
+    'email':req.cookies.email,
+    'mobile':req.cookies.mobile,
+    'country':req.cookies.country,
+    'province':req.cookies.province,
+    'city':req.cookies.city,
+    'street':req.cookies.street,
+    'postal':req.cookies.postal,
+  };
+  if (!user.id) {
     return res.send("<html><body><b>Please signin!</b></body></html>\n");
   }
   productQueries.getProductById(req.params.product_id)
     .then((product) => {
-      userQueries.getUserById(userId)
-        .then((user) => {
-          const templateVars = {product,user};
-          res.render("checkout", templateVars);
-        });
+      const templateVars = {product,user};
+      if (!product) {
+        return res.send("<html><body><b>Item Gone!</b></body></html>\n");
+      }
+      res.render("checkout", templateVars);
+      // res.json(templateVars);
     })
     .catch(err => {
       res
@@ -156,12 +165,14 @@ router.get('/checkout/:product_id', (req, res) => {
     });
 });
 
-router.post('/products/filter', (req, res) => {
-  const {minPrice, maxPrice} = req.body;
-  const user = req.cookies.username;
+router.post('/filter/filter/', (req, res) => {
+  const user = {'name':req.cookies.username,'id':req.cookies.id};
+  let {minPrice, maxPrice} = req.body;
   productQueries.getProductsByFilter(minPrice, maxPrice)
     .then((products) => {
-      res.status(200).json({products,user});
+      const templateVars = {products,user};
+      // res.status(200).json({products,user});
+      res.render("products_index", templateVars);
     })
     .catch(err => {
       res
@@ -172,8 +183,8 @@ router.post('/products/filter', (req, res) => {
 
 
 router.post('/delete/:id', (req, res) => {
-  const user = req.cookies.username;
-  if (!user) {
+  const user = {'name':req.cookies.username,'id':req.cookies.id};
+  if (!user.id) {
     return res.send("<html><body><b>Please signin!</b></body></html>\n");
   }
   productQueries.removeProductByid(req.params.id)
@@ -185,19 +196,29 @@ router.post('/delete/:id', (req, res) => {
     });
   productQueries.getAllProducts()
     .then((products) => {
-      const templateVars = { products };
-      res.render("admin_index", templateVars);
+      const templateVars = { products, user};
+      res.render("admin", templateVars);
     });
 
 });
 
 router.post('/marksold/:id', (req, res) => {
-  const user = req.cookies.username;
-  if (!user) {
+  const user = {'name':req.cookies.username,'id':req.cookies.id};
+  if (!user.id) {
     return res.send("<html><body><b>Please signin!</b></body></html>\n");
   }
   productQueries.editProductByid(req.params.id)
     .then(res.redirect('/products/admin/:user_id'))
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+  productQueries.getAllProducts()
+    .then((products) => {
+      const templateVars = { products,user};
+      res.render("admin", templateVars);
+    })
     .catch(err => {
       res
         .status(500)
@@ -215,25 +236,38 @@ const randomNum = (n) => {
 };
 
 
-router.post('/add_product', (req, res) => {
-  const seller_id = req.cookies.id;
+router.post('/add_product/:id', (req, res) => {
   const id = randomNum(5);
   const sold = false;
-  if (!seller_id) {
+  const user = {'name':req.cookies.username,'id':req.cookies.id};
+  const userId = user.id;
+  if (!user.id) {
     return res.send("<html><body><b>Please signin!</b></body></html>\n");
   }
-  let {name, price, description, url} = req.body;
-  productQueries.addProduct({id, name, seller_id, price, sold, description, url})
-    .then(res.redirect('/products/'))
+  const {name, price, description, url} = req.body;
+  productQueries.addProduct({id, name, userId, price, sold, description, url})
+    .then(res.redirect('/products/admin/:user_id'))
     .catch(err => {
       res
         .status(500)
         .json({ error: err.message });
     });
+  productQueries.getAllProducts()
+    .then((products) => {
+      const templateVars = { products,user};
+      res.render("admin", templateVars);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+
 });
 
 router.post('/checkout/:product_id', (req, res) => {
-  const userId = Number(req.cookies.id);
+  const user = {'name':req.cookies.username,'id':req.cookies.id};
+  const userId = Number(user.id);
   const productId = Number(req.params.product_id);
   const time = '2022-12-12 12:00:00';
   const id = randomNum(2);
@@ -277,8 +311,8 @@ router.post('/wishlist/add_product/:product_id', (req, res) => {
 });
 
 router.post('/wishlist/delete_product/:id', (req, res) => {
-  const user = req.cookies.id;
-  if (!user) {
+  const userId = req.cookies.id;
+  if (!userId) {
     return res.send("<html><body><b>Please signin!</b></body></html>\n");
   }
   productQueries.removeProductFromWishItemsById(req.params.id)

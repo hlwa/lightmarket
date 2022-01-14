@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="../styles/product.css">
+  <link rel="stylesheet" href="/styles/product.css">
 
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
 
@@ -18,27 +18,27 @@
 
     <div class="main-content" >
       <div class="container-1">
-       <img src= <%-product.url %>
+        <img src="<%= product.url %>">
 
       <a href=https://www.pngall.com/wp-content/uploads/5/Hand-Sanitizer-PNG-Free-Download.png></a>
       </div>
       <section class="container-right">
 
-         <h1><%-product.name %></h1>
+         <h1><%=product.name %></h1>
 
-         <p > <b>$ <%-product.price %> </b><br><br>
+         <p > <b>$ <%=product.price %> </b><br><br>
 
-          <%-product.description %>
+          <%=product.description %>
         </p>
-        <form method="POST" action="/products/wishlist/add_product/<%-product.id %>">
+        <form method="POST" action="/products/wishlist/add_product/<%=product.id %>">
           <button type="submit">
             Save to list
           </button>
+        </form>
+        <form >
+          <a href="/api/widgets/message_page/:id">Message Seller</a>
         </form>
       </section>
     </div>
   </body>
 </html>
-
-
-

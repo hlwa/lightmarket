@@ -4,14 +4,18 @@
 <div class= "nav-title">
 LIGHTMARKET
 </div>
-<% if (!user || user === "undefined") { %>
+<% if (!user.id || user.id === "undefined") { %>
 <div class="nav-options">
-  Sign In |  <a href="views/Messages.ejs">Messages</a> |<a href="views/wish_items.ejs">Wishlist</a> |  <form method="POST" action='/api/users/login/logout'><button type="send">logout</button>
+  <a href="/api/users/login/2">Sign In</a>|<a href="/products/">Home</a>
 </div>
-<% } else {%>
+<% } else if (user.name === "Admin" || user.id === 1) {%>
   <div class="nav-options">
-    Welcome:<%= user.name %> |  <a href="views/Messages.ejs">Messages</a> |<a href="views/wish_items.ejs">Wishlist</a> |  <form method="POST" action='/api/users/login/logout'><button type="send">logout</button>
+    Welcome   :<%= user.name %> | <a href="/products/" style="color:rgb(248, 241, 241);">Home</a> | <a href="/products/admin/:user_id">Admin Center</a> |  <form method="POST" action='/api/users/login/logout'><button type="submit">logout</button></form>
   </div>
+  <% } else {%>
+    <div class="nav-options">
+      Welcome   :<%= user.name %> | <a href="/products/">Home</a> | <a href="/products/orderlist/2">My Order</a>| <a href="/products/wishlist/wishlist">Wishlist</a> | <form method="POST" action='/api/users/login/logout'><button type="submit">logout</button> </form>
+    </div>
   <% } %>
  </nav>
 </header>
