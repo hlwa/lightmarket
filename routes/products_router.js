@@ -65,7 +65,7 @@ router.get('/orderlist/:user_id', (req, res) => {
     .then((products) => {
       // res.json(products);
       const templateVars = {products};
-      res.render("orderlist", templateVars);//render orderlist.ejs file
+      res.render("orders", templateVars);//render orderlist.ejs file
     })
     .catch(err => {
       res
