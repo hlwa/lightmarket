@@ -47,7 +47,9 @@ router.get('/wishlist/wishlist', (req, res) => {
   productQueries.getWishProductsByUserId(user)//req.params.user_id
     .then((products) => {
       // res.json(products);
+
       const templateVars = {products,user};
+
       res.render("wish_items", templateVars); //render wishlist.ejs file
     })
     .catch(err => {
@@ -72,7 +74,9 @@ router.get('/orderlist/:user_id', (req, res) => {
     });
 });
 
+
 //http://localhost:8080/products/order/:order_id
+
 router.get('/order/:order_id', (req, res) => {
   const user = req.cookies.id;
   productQueries.getProductsByOrderId(req.params.order_id)
