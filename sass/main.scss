@@ -1,22 +1,53 @@
 body {
-  background-color: #ACE9D4;
+  background-color: #ace9d4;
   padding-top: 10em;
+}
+.price-filter {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 2em;
+  margin-left: 100em;
+}
 
-
-
- }
- .container-1{
+.items {
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1em;
+}
 
-    padding-left:10em ;
-    padding-right:10em ;
-    width: 200px;
-    margin-bottom: 2em;
+.container-1 {
+  padding: 28px 28px;
+  border: 2px solid black;
+  padding-top: 5px;
+  border-radius: 10px;
+  box-shadow: rgba(2, 8, 20, 0.6) 0px 1em 1.175em,
+    rgba(2, 8, 20, 0.08) 0px 0.195em 1em;
+  width: 45em;
+  color: black;
 
-    img {
-      max-width: 200%;
-      max-height: 200%;
-     }
+  img {
+    max-height: 50em;
+    max-width: 40em;
+    border-radius: 5px;
+    box-shadow: rgba(2, 8, 20, 0.4) 0px 1em 1.175em,
+      rgba(2, 8, 20, 0.1) 0px 0.295em 1em;
+  }
+  .name-price {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-left: 20px;
+    padding: 20px 18px;
+    color: black;
+    font-size: 30px;
+  }
 
- }
+  footer{
+    display: flex;
+    flex-direction:row ;
+    justify-content: center;
+    max-height: 5em;
+  }
+}

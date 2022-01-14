@@ -1,16 +1,16 @@
 // Client facing scripts here
 
 const renderProducts = (products) => {
-  $('.container-1').empty()
+  $('.container-1').empty();
   products.forEach(product => {
-    let singleProduct = createProductElement(product)
-    $('.filtered-products').append(singleProduct)
+    let singleProduct = createProductElement(product);
+    $('.filtered-products').append(singleProduct);
   });
 
-}
+};
 
 const createProductElement = (product) => {
-  const { url, price, name, sold } = product
+  const { url, price, name, sold } = product;
   let singleProductElement = $(`<div class="container-1">
 <div class="p1">
   Availability: ${sold}
@@ -25,21 +25,21 @@ const createProductElement = (product) => {
       <i class="fas fa-cart-plus"></i>
     </footer>
 </div>
-</div> `)
-  return singleProductElement
-}
+</div> `);
+  return singleProductElement;
+};
 
 
 
 
 
-$(document).ready(function () {
-  $('.filter').find('form').submit(function (e) {
-    e.preventDefault()
+$(document).ready(function() {
+  $('.filter').find('form').submit(function(e) {
+    e.preventDefault();
 
     //collects values form input
-    const minPrice = $('#minPrice').val()
-    const maxPrice = $('#maxPrice').val()
+    const minPrice = $('#minPrice').val();
+    const maxPrice = $('#maxPrice').val();
     //
     $.ajax({
       url: "products/filter",
@@ -49,13 +49,13 @@ $(document).ready(function () {
         minPrice: minPrice,
         maxPrice: maxPrice
       },
-      success: function (res) {
-        console.log(res.products)
-        renderProducts(res.products)
+      success: function(res) {
+        console.log(res.products);
+        renderProducts(res.products);
       }
 
-    })
-  })
-})
+    });
+  });
+});
 
 /* */

@@ -51,16 +51,15 @@
 
             </header>
             <footer>
+
               <div class="name-price">
                 <%= product.name %> $<%= product.price %>
               </div>
-              <form method="POST" action="/products/wishlist/add_product/<%-product.id %> >
-                <button><i class="fas fa-heart"></i></button>
-              </form>
-              <a href="/products/checkout/<%= product.id %>"><i class="fas fa-heart"></i></a>
-
               <form >
-                <button><i class="fas fa-cart-plus"></i></button>
+                <a href="/products/checkout/<%= product.id %>"><i class="fas fa-cart-plus"></i></a>
+              </form>
+              <form method="POST" action="/products/wishlist/add_product/<%-product.id %>" >
+                <button><i class="fas fa-heart"  style="color: blue" ></i></button>
               </form>
             </footer>
         </div>
