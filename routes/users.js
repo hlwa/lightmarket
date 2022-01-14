@@ -17,11 +17,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 const router  = express.Router();
 const userQueries = require('../db/queries/user-queries');
 
-//console.log(userQueries.getUserById);
-
-//"GET"  /login/:id  getUserByid
-
-router.get("/login/:id", (req, res) => {//right path: http://localhost:8080/api/users/login/1
+//http://localhost:8080/api/users/login/2
+router.get("/login/:id", (req, res) => {
   userQueries.getUserById(req.params.id)
     .then(user => {
       // res.json(user);

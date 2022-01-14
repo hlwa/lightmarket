@@ -4,15 +4,15 @@
 <div class= "nav-title">
 LIGHTMARKET
 </div>
+<% if (!user || user === "undefined") { %>
 <div class="nav-options">
-  Welcome:USERNAME |  <a href="views/Messages.ejs">Messages</a> |<a href="views/wish_items.ejs">Wishlist</a> |  <form method="POST" action='/api/users/login/logout'><button type="send">logout</button>
-  </form>
-  </form>
+  Sign In |  <a href="views/Messages.ejs">Messages</a> |<a href="views/wish_items.ejs">Wishlist</a> |  <form method="POST" action='/api/users/login/logout'><button type="send">logout</button>
 </div>
-
-<div>
-
-</div>
+<% } else {%>
+  <div class="nav-options">
+    Welcome:<%= user.name %> |  <a href="views/Messages.ejs">Messages</a> |<a href="views/wish_items.ejs">Wishlist</a> |  <form method="POST" action='/api/users/login/logout'><button type="send">logout</button>
+  </div>
+  <% } %>
  </nav>
 </header>
 

@@ -22,7 +22,15 @@ const client = require('twilio')(accountSid, authToken);
 
 //"GET"  /message_page/:id  getUserByid
 router.get("/message_page/:id", (req, res) => {
-  userQueries.getUserById(req.params.id)
+  const user = req.cookies.username;
+  const userId = req.cookies.id;
+  if (!user) {
+    return res.send("<html><body><b>Please signin!</b></body></html>\n");
+  }
+  if (!user) {
+    return res.send("<html><body><b>Please signin!</b></body></html>\n");
+  }
+  userQueries.getUserById(userId)
     .then(user => {
       const templateVars = {user};
       // res.json(user);
