@@ -8,19 +8,17 @@ nav {
   justify-content: space-between;
   position: fixed;
   top: 0;
+  z-index: 1;
   width: 100%;
-
-
-
 }
- .nav-title{
-   font-size: 40px;
-   margin-left: 0.5em ;
+.nav-title {
+  font-size: 40px;
+  margin-left: 0.5em;
 }
-  .nav-options{
-  margin-left: 18em;
+.nav-options {
+  margin-left: 70em;
   font-size: 20px;
-  }
-
-
-
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
