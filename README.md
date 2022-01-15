@@ -5,10 +5,10 @@ Sellers have a converstations page where they can access their messages with buy
 
 ## Final Product
 
-!["Homepage"](https://github.com/celsinga/buy-sell-app/blob/master/public/Screenshots/homepage.png)
-!["Item page"](https://github.com/celsinga/buy-sell-app/blob/master/public/Screenshots/item.png)
-!["Messages"](https://github.com/celsinga/buy-sell-app/blob/master/public/Screenshots/messages.png)
-!["Search"](https://github.com/celsinga/buy-sell-app/blob/master/public/Screenshots/search.png)
+!["Homepage"](https://github.com/hailan6257/lightmarket/blob/master/public/Screenshots/Home.png?raw=true)
+!["Place Order"](https://github.com/hailan6257/lightmarket/blob/master/public/Screenshots/Place-order.png)
+!["Messages"](https://github.com/hailan6257/lightmarket/blob/master/public/Screenshots/SMS.png)
+!["Wish list"](https://github.com/hailan6257/lightmarket/blob/master/public/Screenshots/Wishlist.png)
 
 ## Dependencies
 
