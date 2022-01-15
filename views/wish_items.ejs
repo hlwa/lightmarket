@@ -3,21 +3,20 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Bootstrap CSS -->
-
-  <link rel="stylesheet" href="/styles/wish_items.css">
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/wish_items.css">
+
 
   <title>Wish List</title>
 </head>
 
 <body>
   <%- include("partials/header") %>
-  <header><b>
-      <h1>My Wish List</h1>
-    </b></header>
+  <header>
+      <h1>Wish List</h1>
+  </header>
   <div class=products>
 
     <tbody>
@@ -26,19 +25,10 @@
           <div class="container-1">
             <img src="<%= product.url %>">
           </div>
-
           <section class="container-right">
-
-              <div >
-                <%=product.name %><br>
-                <%=product.price %><br>
-              </div>
-
-              <div >
-                <%=product.description %><br>
-              </div>
-
-
+            <h3><%=product.name %></h3>
+            <div> Price:<b>$ <%=product.price %> </b></div>
+            <div>Description: <p><%=product.description %> </p></div>
               <form >
 
                 <a href="/products/checkout/<%= product.id %>">Buy Now</a>

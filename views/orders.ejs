@@ -3,12 +3,10 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Bootstrap CSS -->
-
-  <link rel="stylesheet" href="/styles/orderlist.css">
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/orderlist.css">
 
   <title>Orders</title>
 
@@ -16,25 +14,23 @@
 
 <body>
   <%- include("partials/header") %>
-  <header><b>
-      <h1> Orders </h1>
-    </b></header>
+  <header>
+      <h1>My Order</h1>
+  </header>
   <div class=products>
 
     <tbody>
-      <% for(product of products) { %>
+      <% for( const product of products) { %>
         <div class="main-content">
           <div class="container-1">
-            <img src="<%= product.url %>"><br>
+            <img src="<%= product.url %>">
           </div>
-          <div class="container-2">
-            <b><%=product.name %><br></b>
-           <p>$ <%=product.price %><br></p>
-          </div>
-          <p class="container-3">
-            <%=product.description %>
-          </p>
-
+          <section class="container-right">
+            <h3><%=product.name %></h3>
+            <div> Price:<b>$ <%=product.price %> </b></div>
+            <div>Buyer:<b><%=user.name %> </b></div>
+            <div>Description: <p><%=product.description %> </p></div>
+          </section>
         </div>
         <% } %>
     </tbody>

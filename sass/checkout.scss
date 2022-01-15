@@ -1,0 +1,61 @@
+body {
+  background-color:  #fbfdfd;
+  padding-top: 10em;
+  display: flex;
+  flex-direction:row;
+
+  .main-content {
+    color: rgb(63, 61, 61);
+    flex-direction: column;
+    font-size:160 px;
+    line-height: 1.6em;
+    margin-left: 10%;
+    width:40%;
+
+    .container-1 {
+      width: 60%;
+      justify-content: flex-end;
+      img {
+       width:80%;
+       margin-left: 20%;
+      }
+    }
+
+    .container-right {
+      flex-direction:column;
+      justify-content:space-around;
+      margin-top:2em;
+      button {
+        background: transparent;
+        border:none;
+        color:rgb(30, 168, 223);
+        text-decoration:underline;
+      }
+      form {
+        margin-top: 1em;
+
+        a {
+          color:rgb(30, 168, 223);
+          margin-left: 0.5em;
+        }
+      }
+    }
+  }
+  .checkout-content {
+    color: rgb(63, 61, 61);
+    line-height: 1.6em;
+    margin-left: 7%;
+    width:40%;
+    div {
+      margin-top: 1em;
+    }
+    button {
+      margin-top: 1em;
+    }
+  }
+
+}
+
+
+
+

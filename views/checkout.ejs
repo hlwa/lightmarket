@@ -3,30 +3,16 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="../styles/product.css">
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/admin.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/checkout.css">
 
-  <title>Product</title>
+  <title>Checkout</title>
  </head>
 
   <body>
-    <% include('partials/header') %>
-    <header><b><h1><%-product.name %></h1></b></header>
-    <form method="POST" action="/products/checkout/<%-product.id %>">
-        <div><%-user.username %></div>
-        <div><%-user.mobile %></div>
-        <div><%-user.country %></div>
-        <div><%-user.province %></div>
-        <div><%-user.city %></div>
-        <div><%-user.street %></div>
-        <div><%-user.postal %></div>
-        <button type="send" class="btn btn-outline-primary">Deliver And Cash</button>
-    </form>
-
+    <%- include("partials/header") %>
 
     <div class="main-content" >
       <div class="container-1">
@@ -42,6 +28,21 @@
           Desciption: <%-product.description %>
         </p>
       </section>
+    </div>
+
+    <div class="checkout-content">
+      <header><h3> <div>Deliver To:<%-user.name %></div></h3></header>
+      <form method="POST" action="/products/checkout/<%-product.id %>">
+
+          <div>Moble number:<%-user.mobile %></div>
+          <div>Street:<%-user.street %></div>
+          <div>City:<%-user.city %></div>
+          <div>Province:<%-user.province %></div>
+          <div>Country:<%-user.country %></div>
+          <div>Postal:<%-user.postal %></div>
+          <div><input type="radio" name="sex" value="Deliver and Pay Cash" checked>Deliver and Pay By Cash<br></div>
+          <button type="send" class="btn btn-outline-primary">Place Order</button>
+      </form>
     </div>
   </body>
 </html>

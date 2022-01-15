@@ -1,36 +1,48 @@
 body {
   padding-top: 10em;
-  color: #161718;
-  background-color: #f8ebd6;
-  font-size: 160 px;
-  line-height: 1.6em;
-  margin: 0;
-  font-family: "Source Sans Pro", sans-serif;
+  background-color:  #fbfdfd;
+  header {
+    display:flex;
+    justify-content:center;
+    color:rgb(30, 168, 223);
+  }
+
 }
 
 .main-content {
+  color: rgb(63, 61, 61);
   display: flex;
   flex-direction: row;
-  /* align-items: left; */
+  justify-content: space-between;
+  align-items: center;
+  font-size:160 px;
+  line-height: 1.6em;
+  margin: 0;
+  .container-1 {
+    width: 40%;
+    justify-content: flex-end;
+
+    img {
+      width:60%;
+      padding-left: 15%;
+    }
+  }
+  .container-right {
+    flex-direction:column;
+    justify-content: space-around;
+    margin-top:2em;
+    width: 60%;
+    a {
+      color:rgb(30, 168, 223);
+      margin-left: 0.5em;
+    }
+  }
+
 }
 
-.container-right {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 400px;
-  padding: 60px;
-}
 
-.container-1 {
-  width: 50%;
-  justify-content: row;
-  align-items: flex-start;
-  border-color: #0f1113;
-  border-width: 40px;
-  margin: auto;
-  padding: auto;
-}
+
+
 
 .container-3 {
   justify-content: column;
@@ -42,11 +54,7 @@ body {
   text-align: left;
 }
 
-.container-1 > img {
-  width: 300px;
-  padding : 20px;
 
-}
 
 .container-2 {
   text-align: left;

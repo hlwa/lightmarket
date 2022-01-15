@@ -2,7 +2,7 @@
 <header>
  <nav>
 <div class= "nav-title">
-LIGHTMARKET
+LIGHT MART
 </div>
 <% if (!user.id || user.id === "undefined") { %>
 <div class="nav-options">
@@ -10,11 +10,11 @@ LIGHTMARKET
 </div>
 <% } else if (user.name === "Admin" || user.id === 1) {%>
   <div class="nav-options">
-    Welcome   :<%= user.name %> | <a href="/products/" style="color:rgb(248, 241, 241);">Home</a> | <a href="/products/admin/:user_id">Admin Center</a> |  <form method="POST" action='/api/users/login/logout'><button type="submit">logout</button></form>
+    Welcome   :<%= user.name %>  <a href="/products/" style="color:rgb(248, 241, 241);">Home</a>  <a href="/products/admin/:user_id">Admin Center</a>  <form method="POST" action='/api/users/login/logout'><button type="submit">Logout</button></form>
   </div>
   <% } else {%>
     <div class="nav-options">
-      Welcome   :<%= user.name %> | <a href="/products/">Home</a> | <a href="/products/orderlist/2">My Order</a>| <a href="/products/wishlist/wishlist">Wishlist</a> | <form method="POST" action='/api/users/login/logout'><button type="submit">logout</button> </form>
+      Welcome   :<%= user.name || user.username%>  <a href="/products/">Home</a> <a href="/products/orderlist/2">My Order</a> <a href="/products/wishlist/wishlist">Wish List</a>  <form method="POST" action='/api/users/login/logout'><button type="submit">Logout</button> </form>
     </div>
   <% } %>
  </nav>

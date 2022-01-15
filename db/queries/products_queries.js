@@ -52,12 +52,12 @@ const getWishProductsByUserId  = (id) => {
 
 
 
-const getOrdersProductsByUserId = (id) => {
+const getOrdersProductsByUserId = (id) => {    // JOIN orders ON orders.user_id  = order_items.user_id
   return db
     .query(`SELECT * FROM products
     JOIN order_items ON products.id = product_id
-    JOIN orders ON orders.user_id  = order_items.user_id
-    WHERE orders.user_id = $1`,[id])
+
+    WHERE order_items.user_id = $1;`,[id])
 
     .then((response) => {
       // console.log(response.rows);

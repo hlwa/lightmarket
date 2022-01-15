@@ -2,32 +2,23 @@
 <html lang="en">
 <head>
   <title>Send Message</title>
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/admin.css" type="text/css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-
-  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-  <script type="text/javascript" src="/scripts/app.js"></script>
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/message.css">
 </head>
 <body>
+  <%- include("partials/header") %>
     <div class="table-data">
 <h2>Send Message</h2>
-            <div><%= user.username %></div>
-            <form method="POST" action='send/<%= user.id %>'>
-              <div>message</div>
-              <input type="text" id="message" name="message"><br>
-              <div>mobile</div>
-              <input type="text" id="mobile" name="mobile" value="<%= user.mobile %>">
-              <button type="send" class="btn btn-outline-primary">Send</button>
-            </form>
 
+
+            <form method="POST" action='send/<%= user.id %>'>
+              <h3>To:<%= user.username %></h3>
+              <h4>Mobile:<input type="text" id="mobile" name="mobile" value="<%= user.mobile %>"></h4>
+              <input type="text" id="message" name="message" placeholder="Hi there!">
+              <div ><button type="send" class="btn btn-outline-primary">Send</button></div>
+            </form>
     </table>
     </div>
 </body>

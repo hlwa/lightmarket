@@ -14,11 +14,25 @@ nav {
 .nav-title {
   font-size: 40px;
   margin-left: 0.5em;
+  font-style:italic;
 }
 .nav-options {
-  margin-left: auto;
   font-size: 20px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: right;
+  button {
+    background: transparent;
+    border:none;
+    color:white;
+    padding-left: 2em;
+  }
+  a {
+    color:white;
+    display:block;
+    padding-left: 2em;
+    padding-right: 5px;
+    text-decoration: none;
+  }
 }
+

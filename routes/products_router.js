@@ -135,7 +135,7 @@ router.get('/admin/add/product', (req, res) => {
 
 //http://localhost:8080/products/checkout/:product_id
 router.get('/checkout/:product_id', (req, res) => {
-  const user = {'username':req.cookies.username,
+  const user = {'name':req.cookies.username,
     'id':req.cookies.id,
     'seller':req.cookies.seller,
     'email':req.cookies.email,

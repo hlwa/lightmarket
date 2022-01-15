@@ -3,40 +3,34 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="/styles/product.css">
 
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
-
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/product.css">
   <title>Product</title>
  </head>
 
   <body>
-    <% include('partials/header') %>
+    <%- include("partials/header") %>
 
     <div class="main-content" >
       <div class="container-1">
         <img src="<%= product.url %>">
-
-      <a href=https://www.pngall.com/wp-content/uploads/5/Hand-Sanitizer-PNG-Free-Download.png></a>
       </div>
       <section class="container-right">
 
-         <h1><%=product.name %></h1>
-
-         <p > <b>$ <%=product.price %> </b><br><br>
-
-          <%=product.description %>
-        </p>
+        <h3><%=product.name %></h3>
+         <div> Price:<b>$ <%=product.price %> </b></div>
+         <div>Description: <p><%=product.description %> </p></div>
         <form method="POST" action="/products/wishlist/add_product/<%=product.id %>">
-          <button type="submit">
-            Save to list
-          </button>
+          <button type="submit"> Save to list</button>
         </form>
         <form >
-          <a href="/api/widgets/message_page/:id">Message Seller</a>
+
+          <a href="/products/checkout/<%= product.id %>">Buy Now</a>
+        </form>
+        <form >
+          <a href="/api/widgets/message_page/:id" id="message-button">Message Seller</a>
         </form>
       </section>
     </div>
